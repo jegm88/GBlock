@@ -2,10 +2,13 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="GBlockPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <jta-data-source>jdbc/__default</jta-data-source>
+    <jta-data-source>Gblock(postgresql)</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="eclipselink.ddl-generation" value="create-tables"/>
-    </properties>
+        <property name="eclipselink.logging.level" value="FINE"/>
+        <property name="eclipselink.logging.parameters" value="true"/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+      <property name="eclipselink.weaving" value="false"/><property name="eclipselink.weaving" value="false"/>
+      <property name="eclipselink.weaving" value="false"/></properties>
   </persistence-unit>
 </persistence>

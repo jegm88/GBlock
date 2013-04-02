@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
+  <services>
+    <service name="InventarioServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.InventarioServicio</implementation-class>
+    </service>
+    <service name="CorreoServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.CorreoServicio</implementation-class>
+    </service>
+    <service name="TerceroServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.TerceroServicio</implementation-class>
+    </service>
+    <service name="DocumentoServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.DocumentoServicio</implementation-class>
+    </service>
+    <service name="TipoDocumentoServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.TipoDocumentoServicio</implementation-class>
+    </service>
+    <service name="TelefonoServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.TelefonoServicio</implementation-class>
+    </service>
+    <service name="FormaPagoServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.FormaPagoServicio</implementation-class>
+    </service>
+    <service name="ArticuloServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.ArticuloServicio</implementation-class>
+    </service>
+    <service name="BodegaServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.BodegaServicio</implementation-class>
+    </service>
+    <service name="ArqueoServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.ArqueoServicio</implementation-class>
+    </service>
+    <service name="UsuarioServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.UsuarioServicio</implementation-class>
+    </service>
+    <service name="PerfilServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.PerfilServicio</implementation-class>
+    </service>
+    <service name="TipoTerceroServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.TipoTerceroServicio</implementation-class>
+    </service>
+    <service name="CategoriaArticuloServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.CategoriaArticuloServicio</implementation-class>
+    </service>
+    <service name="DetalleDocumentoServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.DetalleDocumentoServicio</implementation-class>
+    </service>
+    <service name="VentaServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.VentaServicio</implementation-class>
+    </service>
+    <service name="CompraServicio">
+      <implementation-class>co.com.gblock.ImplementacionServicios.CompraServicio</implementation-class>
+    </service>
+  </services>
+  <clients/>
+</jax-ws>
