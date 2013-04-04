@@ -5,10 +5,12 @@
     <jta-data-source>Gblock(postgresql)</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-        <property name="eclipselink.logging.level" value="FINE"/>
-        <property name="eclipselink.logging.parameters" value="true"/>
+      <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.logging.parameters" value="true"/>
       <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
-      <property name="eclipselink.weaving" value="false"/><property name="eclipselink.weaving" value="false"/>
-      <property name="eclipselink.weaving" value="false"/></properties>
+      <property name="eclipselink.weaving" value="false"/>
+      <property name="eclipselink.weaving" value="false"/>
+      <property name="eclipselink.weaving" value="false"/>
+    </properties>
   </persistence-unit>
 </persistence>

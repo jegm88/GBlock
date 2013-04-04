@@ -15,6 +15,6 @@ import javax.jws.WebService;
  */
 @Stateless
 @WebService(endpointInterface="co.com.gblock.InterfaceServicios.IArticuloServicio")
-public class ArticuloServicio extends GenericaServicio<Articulo, Integer> implements IArticuloServicio{
+public class ArticuloServicio extends GenericaServicio<Articulo, Long> implements IArticuloServicio{
     
 }

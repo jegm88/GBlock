@@ -12,6 +12,6 @@ import javax.jws.WebService;
  * @author FGulfo
  */
 @WebService(name="IDetalleDocumentoServicio")
-public interface IDetalleDocumentoServicio extends IGenericaServicio<DetalleDocumento, Integer> {
+public interface IDetalleDocumentoServicio extends IGenericaServicio<DetalleDocumento, Long> {
     
 }

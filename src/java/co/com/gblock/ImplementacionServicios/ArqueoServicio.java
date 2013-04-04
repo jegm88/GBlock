@@ -15,6 +15,6 @@ import javax.jws.WebService;
  */
 @Stateless
 @WebService(endpointInterface="co.com.gblock.InterfaceServicios.IArqueoServicio")
-public class ArqueoServicio extends GenericaServicio<Arqueo, Integer> implements IArqueoServicio{
+public class ArqueoServicio extends GenericaServicio<Arqueo, Long> implements IArqueoServicio{
     
 }
