@@ -82,6 +82,7 @@ public class Documento implements Serializable {
     @Size(min = 1, max = 50)
     private String vendedor;
     private String observaciones;
+    private Integer alerta;
     private Integer estado;
     @OneToMany
     @NotNull

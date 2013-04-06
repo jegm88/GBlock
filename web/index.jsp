@@ -6,12 +6,22 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pou="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login</title>
     </head>
+    
     <body>
-        <h1>Hello World!</h1>
+        <aside title="Login">
+        <label>Usuario</label>
+        <input type="text" value=""/>
+        <label>Password</label>
+        <input type="password" value=""/>
+        <input type="submit" value=""/>
+        </aside>
+        
     </body>
 </html>
