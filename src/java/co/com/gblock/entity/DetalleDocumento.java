@@ -27,6 +27,7 @@ public class DetalleDocumento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     @JoinColumn(name = "documento", referencedColumnName = "id")
     @ManyToOne
     private Documento documento;
@@ -100,7 +101,7 @@ public class DetalleDocumento implements Serializable {
         this.total = total;
         this.descripcion = descripcion;
         this.estado = estado;
-    }   
+    }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
     public Long getId() {

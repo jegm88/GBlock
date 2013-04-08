@@ -7,8 +7,10 @@ package co.com.gblock.entity;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,9 +54,6 @@ public class Documento implements Serializable {
     @JoinColumn(name = "receptor", referencedColumnName = "id")
     @ManyToOne
     private Tercero receptor;
-    @JoinColumn(name = "documento_asociado", referencedColumnName = "id")
-    @ManyToOne
-    private Documento documentoAsociado;
     @JoinColumn(name = "forma_pago", referencedColumnName = "id")
     @ManyToOne
     private FormaPago formaPago;
@@ -87,11 +86,14 @@ public class Documento implements Serializable {
     @OneToMany
     @NotNull
     private List<DetalleDocumento> detallesDocumento;
+    @OneToMany
+    @JoinColumn(name = "documento_asociado", referencedColumnName = "id")
+    private List<Documento> documentosAsociados;
 
     public Documento() {
     }
 
-    public Documento(Long id, String codigo, TipoDocumento tipo, Bodega bodega, Calendar fecha1, Calendar fecha2, Tercero emisor, Tercero receptor, Documento documentoAsociado, FormaPago formaPago, Double reteiva, Double reteica, Double retefuente, String tipoReteiva, String tipoReteica, String tipoRetefuente, Double totalIva, Double descuento, Double subtotal, Double total, String vendedor, String observaciones, Integer estado) {
+    public Documento(Long id, String codigo, TipoDocumento tipo, Bodega bodega, Calendar fecha1, Calendar fecha2, Tercero emisor, Tercero receptor, FormaPago formaPago, Double reteiva, Double reteica, Double retefuente, String tipoReteiva, String tipoReteica, String tipoRetefuente, Double totalIva, Double descuento, Double subtotal, Double total, String vendedor, String observaciones, Integer alerta, Integer estado) {
         this.id = id;
         this.codigo = codigo;
         this.tipo = tipo;
@@ -100,7 +102,6 @@ public class Documento implements Serializable {
         this.fecha2 = fecha2;
         this.emisor = emisor;
         this.receptor = receptor;
-        this.documentoAsociado = documentoAsociado;
         this.formaPago = formaPago;
         this.reteiva = reteiva;
         this.reteica = reteica;
@@ -114,6 +115,7 @@ public class Documento implements Serializable {
         this.total = total;
         this.vendedor = vendedor;
         this.observaciones = observaciones;
+        this.alerta = alerta;
         this.estado = estado;
     }    
     
@@ -286,14 +288,6 @@ public class Documento implements Serializable {
         this.formaPago = formaPago;
     }
 
-    public Documento getDocumentoAsociado() {
-        return documentoAsociado;
-    }
-
-    public void setDocumentoAsociado(Documento documentoAsociado) {
-        this.documentoAsociado = documentoAsociado;
-    }
-
     public Bodega getBodega() {
         return bodega;
     }
@@ -310,6 +304,22 @@ public class Documento implements Serializable {
         this.detallesDocumento = detallesDocumento;
     }
 
+    public List<Documento> getDocumentosAsociados() {
+        return documentosAsociados;
+    }
+
+    public void setDocumentosAsociados(List<Documento> documentosAsociados) {
+        this.documentosAsociados = documentosAsociados;
+    }   
+
+    public Integer getAlerta() {
+        return alerta;
+    }
+
+    public void setAlerta(Integer alerta) {
+        this.alerta = alerta;
+    }
+    
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Metodos Sobreescritos">
     @Override
@@ -331,12 +341,12 @@ public class Documento implements Serializable {
         hash = 83 * hash + (this.total != null ? this.total.hashCode() : 0);
         hash = 83 * hash + (this.vendedor != null ? this.vendedor.hashCode() : 0);
         hash = 83 * hash + (this.observaciones != null ? this.observaciones.hashCode() : 0);
+        hash = 83 * hash + (this.alerta != null ? this.alerta.hashCode() : 0);
         hash = 83 * hash + (this.estado != null ? this.estado.hashCode() : 0);
         hash = 83 * hash + (this.tipo != null ? this.tipo.hashCode() : 0);
         hash = 83 * hash + (this.receptor != null ? this.receptor.hashCode() : 0);
         hash = 83 * hash + (this.emisor != null ? this.emisor.hashCode() : 0);
         hash = 83 * hash + (this.formaPago != null ? this.formaPago.hashCode() : 0);
-        hash = 83 * hash + (this.documentoAsociado != null ? this.documentoAsociado.hashCode() : 0);
         hash = 83 * hash + (this.bodega != null ? this.bodega.hashCode() : 0);
         return hash;
     }
@@ -398,6 +408,9 @@ public class Documento implements Serializable {
         if ((this.observaciones == null) ? (other.observaciones != null) : !this.observaciones.equals(other.observaciones)) {
             return false;
         }
+        if (this.alerta != other.alerta && (this.alerta == null || !this.alerta.equals(other.alerta))) {
+            return false;
+        }
         if (this.estado != other.estado && (this.estado == null || !this.estado.equals(other.estado))) {
             return false;
         }
@@ -413,9 +426,6 @@ public class Documento implements Serializable {
         if (this.formaPago != other.formaPago && (this.formaPago == null || !this.formaPago.equals(other.formaPago))) {
             return false;
         }
-        if (this.documentoAsociado != other.documentoAsociado && (this.documentoAsociado == null || !this.documentoAsociado.equals(other.documentoAsociado))) {
-            return false;
-        }
         if (this.bodega != other.bodega && (this.bodega == null || !this.bodega.equals(other.bodega))) {
             return false;
         }
@@ -424,7 +434,7 @@ public class Documento implements Serializable {
 
     @Override
     public String toString() {
-        return "Documento{" + "id=" + id + ", codigo=" + codigo + ", fecha1=" + fecha1 + ", fecha2=" + fecha2 + ", reteiva=" + reteiva + ", reteica=" + reteica + ", retefuente=" + retefuente + ", tipoReteiva=" + tipoReteiva + ", tipoReteica=" + tipoReteica + ", tipoRetefuente=" + tipoRetefuente + ", totalIva=" + totalIva + ", descuento=" + descuento + ", subtotal=" + subtotal + ", total=" + total + ", vendedor=" + vendedor + ", observaciones=" + observaciones + ", estado=" + estado + ", tipo=" + tipo + ", receptor=" + receptor + ", emisor=" + emisor + ", formaPago=" + formaPago + ", documentoAsociado=" + documentoAsociado + ", bodega=" + bodega + '}';
+        return "Documento{" + "id=" + id + ", codigo=" + codigo + ", fecha1=" + fecha1 + ", fecha2=" + fecha2 + ", reteiva=" + reteiva + ", reteica=" + reteica + ", retefuente=" + retefuente + ", tipoReteiva=" + tipoReteiva + ", tipoReteica=" + tipoReteica + ", tipoRetefuente=" + tipoRetefuente + ", totalIva=" + totalIva + ", descuento=" + descuento + ", subtotal=" + subtotal + ", total=" + total + ", vendedor=" + vendedor + ", observaciones=" + observaciones + ", alerta=" + alerta + ", estado=" + estado + ", tipo=" + tipo + ", receptor=" + receptor + ", emisor=" + emisor + ", formaPago=" + formaPago + ", bodega=" + bodega + '}';
     }
     //</editor-fold>
 }

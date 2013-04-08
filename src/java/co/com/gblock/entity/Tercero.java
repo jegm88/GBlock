@@ -7,7 +7,10 @@ package co.com.gblock.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,12 +28,14 @@ import javax.validation.constraints.Size;
 public class Tercero implements Serializable {
 
     @Id
-    @NotNull
-    @Size(min = 1, max = 50)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Size(max = 50)
     private String tipoId;
-    private Short digitoVerificacion;
+    @NotNull
+    @Column(unique=true)
+    private String numeroId;
+    private Integer digitoVerificacion;
     @Size(max = 50)
     private String nombres;
     @Size(max = 50)
@@ -50,9 +55,10 @@ public class Tercero implements Serializable {
     public Tercero() {
     }
 
-    public Tercero(String id, String tipoId, Short digitoVerificacion, String nombres, String apellidos, String direccion, List<Telefono> telefonos, TipoTercero tipo, List<Correo> correos, Integer estado) {
+    public Tercero(Long id, String tipoId, String numeroId, Integer digitoVerificacion, String nombres, String apellidos, String direccion, List<Telefono> telefonos, TipoTercero tipo, List<Correo> correos, Integer estado) {
         this.id = id;
         this.tipoId = tipoId;
+        this.numeroId = numeroId;
         this.digitoVerificacion = digitoVerificacion;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -64,11 +70,11 @@ public class Tercero implements Serializable {
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -80,11 +86,11 @@ public class Tercero implements Serializable {
         this.tipoId = tipoId;
     }
 
-    public Short getDigitoVerificacion() {
+    public Integer getDigitoVerificacion() {
         return digitoVerificacion;
     }
 
-    public void setDigitoVerificacion(Short digitoVerificacion) {
+    public void setDigitoVerificacion(Integer digitoVerificacion) {
         this.digitoVerificacion = digitoVerificacion;
     }
 
@@ -144,6 +150,14 @@ public class Tercero implements Serializable {
         this.correos = correos;
     }
 
+    public String getNumeroId() {
+        return numeroId;
+    }
+
+    public void setNumeroId(String numeroId) {
+        this.numeroId = numeroId;
+    }    
+
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Metodos sobreescritos">
@@ -152,6 +166,7 @@ public class Tercero implements Serializable {
         int hash = 3;
         hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 17 * hash + (this.tipoId != null ? this.tipoId.hashCode() : 0);
+        hash = 17 * hash + (this.numeroId != null ? this.numeroId.hashCode() : 0);
         hash = 17 * hash + (this.digitoVerificacion != null ? this.digitoVerificacion.hashCode() : 0);
         hash = 17 * hash + (this.nombres != null ? this.nombres.hashCode() : 0);
         hash = 17 * hash + (this.apellidos != null ? this.apellidos.hashCode() : 0);
@@ -174,6 +189,9 @@ public class Tercero implements Serializable {
             return false;
         }
         if ((this.tipoId == null) ? (other.tipoId != null) : !this.tipoId.equals(other.tipoId)) {
+            return false;
+        }
+        if ((this.numeroId == null) ? (other.numeroId != null) : !this.numeroId.equals(other.numeroId)) {
             return false;
         }
         if (this.digitoVerificacion != other.digitoVerificacion && (this.digitoVerificacion == null || !this.digitoVerificacion.equals(other.digitoVerificacion))) {
@@ -199,7 +217,7 @@ public class Tercero implements Serializable {
 
     @Override
     public String toString() {
-        return "Tercero{" + "id=" + id + ", tipoId=" + tipoId + ", digitoVerificacion=" + digitoVerificacion + ", nombres=" + nombres + ", apellidos=" + apellidos + ", direccion=" + direccion + ", estado=" + estado + ", tipo=" + tipo + '}';
+        return "Tercero{" + "id=" + id + ", tipoId=" + tipoId + ", numeroId=" + numeroId + ", digitoVerificacion=" + digitoVerificacion + ", nombres=" + nombres + ", apellidos=" + apellidos + ", direccion=" + direccion + ", estado=" + estado + ", tipo=" + tipo + '}';
     }
     //</editor-fold>
 

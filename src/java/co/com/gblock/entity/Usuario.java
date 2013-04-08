@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @NotNull
     @Size(min = 1, max = 50)
     private String nick;
@@ -45,7 +45,7 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nick, String password, Tercero tercero, Perfil perfil, Integer estado) {
+    public Usuario(Long id, String nick, String password, Tercero tercero, Perfil perfil, Integer estado) {
         this.id = id;
         this.nick = nick;
         this.password = password;
@@ -55,11 +55,11 @@ public class Usuario implements Serializable {
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
