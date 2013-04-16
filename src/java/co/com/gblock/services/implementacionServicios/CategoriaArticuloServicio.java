@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.gblock.services.implementacionServicios;
+package co.com.gblock.services.ImplementacionServicios;
 
-import co.com.gblock.services.interfaceServicios.ICategoriaArticuloServicio;
+import co.com.gblock.services.InterfaceServicios.ICategoriaArticuloServicio;
 import co.com.gblock.entity.CategoriaArticulo;
 import javax.ejb.Stateless;
 import javax.jws.WebService;

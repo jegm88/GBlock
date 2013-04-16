@@ -1,0 +1,49 @@
+body{
+	background: #20B243;
+	color: #221;
+	font-family: "Arial";
+	font-size: 16px;
+	margin: 0;
+	text-align: center;
+}
+
+form, header{
+	background: rgba(10,10,10,0.66);
+	border-radius: 0.6em;
+	-webkit-border-radius:0.6em;
+	box-shadow: rgba(0,0,0,0.9) 10px,10px,10px;
+	color: #EEE;
+	margin: 1em auto;
+	padding: 1em;
+	width: 90px;
+}
+header{
+    background: rgba(10,10,10,0.66);
+	border-radius: 0.6em;
+	-webkit-border-radius:0.6em;
+	box-shadow: rgba(0,0,0,0.9) 10px,10px,10px;
+	color: #EEE;
+	margin: 1em auto;
+	padding: 1em;
+	width: 90px;
+}
+
+
+#error{
+    margin: 11em auto;
+    width: 20%;
+    height: 30%;
+}
+
+#formulario{
+    margin: 6em auto;
+    width: 30%;
+    height: 30%;
+}
+
+#formulario command,input{
+    border: none;
+    display: block;
+    margin: 0.5em;
+    width: 90%;
+}

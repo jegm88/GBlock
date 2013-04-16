@@ -6,8 +6,6 @@ package co.com.gblock.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,8 +22,6 @@ import javax.validation.constraints.Size;
 public class Telefono implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @NotNull
     @Size(min = 1, max = 50)
     private String numero;
@@ -40,8 +36,7 @@ public class Telefono implements Serializable {
     public Telefono() {
     }
 
-    public Telefono(Long id, String numero, String tipo, Tercero tercero, Integer estado) {
-        this.id = id;
+    public Telefono(String numero, String tipo, Tercero tercero, Integer estado) {
         this.numero = numero;
         this.tipo = tipo;
         this.tercero = tercero;
@@ -49,14 +44,6 @@ public class Telefono implements Serializable {
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-        
     public String getNumero() {
         return numero;
     }
@@ -95,7 +82,6 @@ public class Telefono implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 29 * hash + (this.numero != null ? this.numero.hashCode() : 0);
         hash = 29 * hash + (this.tipo != null ? this.tipo.hashCode() : 0);
         hash = 29 * hash + (this.estado != null ? this.estado.hashCode() : 0);
@@ -112,9 +98,6 @@ public class Telefono implements Serializable {
             return false;
         }
         final Telefono other = (Telefono) obj;
-        if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
-            return false;
-        }
         if ((this.numero == null) ? (other.numero != null) : !this.numero.equals(other.numero)) {
             return false;
         }
@@ -132,7 +115,7 @@ public class Telefono implements Serializable {
 
     @Override
     public String toString() {
-        return "Telefono{" + "id=" + id + "numero=" + numero + ", tipo=" + tipo + ", estado=" + estado + ", tercero=" + tercero + '}';
+        return "Telefono{" + "numero=" + numero + ", tipo=" + tipo + ", estado=" + estado + ", tercero=" + tercero + '}';
     }
     //</editor-fold>
 }

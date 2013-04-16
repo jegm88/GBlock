@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -22,15 +23,16 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "usuarios")
+@NamedQuery(name="Usuario.login", query="SELECT u FROM Usuario u WHERE u.nick = :nick AND u.password = :password")
 public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @NotNull
+    private Integer id;
+    
     @Size(min = 1, max = 50)
     private String nick;
-    @NotNull
+    
     @Size(min = 1, max = 50)
     private String password;
     @JoinColumn(name = "tercero", referencedColumnName = "id")
@@ -39,13 +41,18 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "perfil", referencedColumnName = "id")
     @ManyToOne
     private Perfil perfil;
-    @NotNull
+    
     private Integer estado;
     
     public Usuario() {
     }
 
-    public Usuario(Long id, String nick, String password, Tercero tercero, Perfil perfil, Integer estado) {
+    public Usuario(String nick, String password){
+        this.nick = nick;
+        this.password = password;
+    }
+    
+    public Usuario(Integer id, String nick, String password, Tercero tercero, Perfil perfil, Integer estado) {
         this.id = id;
         this.nick = nick;
         this.password = password;
@@ -55,11 +62,11 @@ public class Usuario implements Serializable {
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

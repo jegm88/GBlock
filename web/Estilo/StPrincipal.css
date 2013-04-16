@@ -1,0 +1,51 @@
+body{
+	background: #20B243;
+	color: #221;
+	font-family: "Arial";
+	font-size: 16px;
+	margin: 0px;
+	text-align: right;
+}
+
+#hp{
+	background: rgba(10,10,10,0.66);
+	border-radius: 0.6em;
+	-webkit-border-radius:0.6em;
+	box-shadow: rgba(0,0,0,0.9) 10px,10px,10px;
+	color: #EEE;
+	margin: 0em auto;
+	padding: 1em;
+	width: 90%;
+    height: 10%;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+#fp article{
+	background: rgba(10,10,10,0.66);
+	border-radius: 0.6em;
+	-webkit-border-radius:0.6em;
+	box-shadow: rgba(0,0,0,0.9) 10px,10px,10px;
+	color: #EEE;
+	margin: 1em auto;
+	padding: 2em;
+	width: 90px;
+    text-align: center;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+#fp{
+	background: rgba(10,10,10,0.66);
+	border-radius: 0.6em;
+	-webkit-border-radius:0.6em;
+	box-shadow: rgba(0,0,0,0.9) 10px,10px,10px;
+	color: #EEE;
+	margin: 4em auto;
+	padding: 1em;
+	width: 60%;
+    height: 90%;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+#tabla{
+    margin-left: 11%;
+}

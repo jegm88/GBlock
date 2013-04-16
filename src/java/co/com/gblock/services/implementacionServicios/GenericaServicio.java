@@ -2,13 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.gblock.services.implementacionServicios;
+package co.com.gblock.services.ImplementacionServicios;
 
-import co.com.gblock.services.interfaceServicios.IGenericaServicio;
+import co.com.gblock.services.InterfaceServicios.IGenericaServicio;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.Local;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -17,8 +16,7 @@ import javax.persistence.Query;
  *
  * @author FGulfo
  */
-@Local
-public class GenericaServicio<Entity, Key> implements IGenericaServicio<Entity, Key> {
+public abstract class GenericaServicio<Entity, Key> implements IGenericaServicio<Entity, Key> {
     
     private static final Logger logger = Logger.getLogger("GenericaServicio");
     
@@ -49,7 +47,7 @@ public class GenericaServicio<Entity, Key> implements IGenericaServicio<Entity, 
 
     @Override
     public List<Entity> listarTodo(Class clazz) {
-        List<Entity> entities;
+        List<Entity> entities = null;
         
         StringBuilder jpql = new StringBuilder();
         jpql.append("SELECT o FROM ");
