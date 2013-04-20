@@ -35,8 +35,7 @@ public class FormaPago implements Serializable {
     public FormaPago() {
     }
 
-    public FormaPago(Integer id, String nombre, String descripcion, Integer estado) {
-        this.id = id;
+    public FormaPago(String nombre, String descripcion, Integer estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.estado = estado;

@@ -2,14 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.gblock.services.ImplementacionServicios;
+package co.com.gblock.services.implementacionServicios;
 
-import co.com.gblock.services.InterfaceServicios.IUsuarioServicio;
+import co.com.gblock.services.interfaceServicios.IUsuarioServicio;
 import co.com.gblock.entity.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
-import javax.jws.WebService;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
@@ -18,7 +17,6 @@ import javax.persistence.TypedQuery;
  * @author FGulfo
  */
 @Stateless
-@WebService(endpointInterface="co.com.gblock.InterfaceServicios.IUsuarioServicio")
 public class UsuarioServicio extends GenericaServicio<Usuario, Integer> implements IUsuarioServicio{
     private static final Logger LOGGER = Logger.getLogger("UsuarioServicio");
 

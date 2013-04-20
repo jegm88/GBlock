@@ -6,6 +6,8 @@ package co.com.gblock.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,8 +24,10 @@ import javax.validation.constraints.Size;
 public class Correo implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 150)
     private String email;
     @Size(max = 50)
     private String tipo;
@@ -43,8 +47,15 @@ public class Correo implements Serializable {
         this.estado = estado;
     }
 
-
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }    
+    
     public String getEmail() {
         return email;
     }
@@ -83,6 +94,7 @@ public class Correo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
+        hash = 29 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 23 * hash + (this.email != null ? this.email.hashCode() : 0);
         hash = 23 * hash + (this.tipo != null ? this.tipo.hashCode() : 0);
         hash = 23 * hash + (this.estado != null ? this.estado.hashCode() : 0);
@@ -99,6 +111,9 @@ public class Correo implements Serializable {
             return false;
         }
         final Correo other = (Correo) obj;
+         if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
+            return false;
+        }
         if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
             return false;
         }
@@ -116,7 +131,7 @@ public class Correo implements Serializable {
 
     @Override
     public String toString() {
-        return "Correo{" + "email=" + email + ", tipo=" + tipo + ", estado=" + estado + ", tercero=" + tercero + '}';
+        return "Correo{" + "id=" + id + "email=" + email + ", tipo=" + tipo + ", estado=" + estado + ", tercero=" + tercero + '}';
     }
     //</editor-fold>
 }

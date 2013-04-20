@@ -41,8 +41,7 @@ public class Cartera implements Serializable {
     @NotNull
     private Integer estado;
 
-    public Cartera(Long id, Tercero tercero, Documento documento, Double abono, Double saldo, Integer estado) {
-        this.id = id;
+    public Cartera(Tercero tercero, Documento documento, Double abono, Double saldo, Integer estado) {
         this.tercero = tercero;
         this.documento = documento;
         this.abono = abono;

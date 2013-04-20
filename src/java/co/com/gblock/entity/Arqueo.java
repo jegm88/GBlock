@@ -67,8 +67,7 @@ public class Arqueo implements Serializable {
     public Arqueo() {
     }
 
-    public Arqueo(Long id, Bodega bodega, Calendar fechaApertura, Double valorApertura, Usuario usuarioApertura, Calendar fechaCierre, Double valorCierre, Usuario usuarioCierre, Double descuadre, Integer estado) {
-        this.id = id;
+    public Arqueo(Bodega bodega, Calendar fechaApertura, Double valorApertura, Usuario usuarioApertura, Calendar fechaCierre, Double valorCierre, Usuario usuarioCierre, Double descuadre, Integer estado) {
         this.bodega = bodega;
         this.fechaApertura = fechaApertura;
         this.valorApertura = valorApertura;

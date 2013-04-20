@@ -91,8 +91,7 @@ public class Documento implements Serializable {
     public Documento() {
     }
 
-    public Documento(Long id, String codigo, TipoDocumento tipo, Bodega bodega, Calendar fecha1, Calendar fecha2, Tercero emisor, Tercero receptor, Documento documentoAsociado, FormaPago formaPago, Double reteiva, Double reteica, Double retefuente, String tipoReteiva, String tipoReteica, String tipoRetefuente, Double totalIva, Double descuento, Double subtotal, Double total, String vendedor, String observaciones, Integer estado) {
-        this.id = id;
+    public Documento(String codigo, TipoDocumento tipo, Bodega bodega, Calendar fecha1, Calendar fecha2, Tercero emisor, Tercero receptor, Documento documentoAsociado, FormaPago formaPago, Double reteiva, Double reteica, Double retefuente, String tipoReteiva, String tipoReteica, String tipoRetefuente, Double totalIva, Double descuento, Double subtotal, Double total, String vendedor, String observaciones, Integer estado) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.bodega = bodega;

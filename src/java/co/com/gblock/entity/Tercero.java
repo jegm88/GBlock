@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,9 +27,11 @@ import javax.validation.constraints.Size;
 public class Tercero implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotNull
     @Size(min = 1, max = 50)
-    private String id;
+    private String numeroId;
     @Size(max = 50)
     private String tipoId;
     private Short digitoVerificacion;
@@ -46,12 +50,12 @@ public class Tercero implements Serializable {
     private List<Correo> correos;
     @NotNull
     private Integer estado;
-    
+
     public Tercero() {
     }
 
-    public Tercero(String id, String tipoId, Short digitoVerificacion, String nombres, String apellidos, String direccion, List<Telefono> telefonos, TipoTercero tipo, List<Correo> correos, Integer estado) {
-        this.id = id;
+    public Tercero(String numeroId, String tipoId, Short digitoVerificacion, String nombres, String apellidos, String direccion, List<Telefono> telefonos, TipoTercero tipo, List<Correo> correos, Integer estado) {
+        this.numeroId = numeroId;
         this.tipoId = tipoId;
         this.digitoVerificacion = digitoVerificacion;
         this.nombres = nombres;
@@ -64,13 +68,21 @@ public class Tercero implements Serializable {
     }
 
     //<editor-fold defaultstate="collapsed" desc="Getters & Setters">
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }    
+
+    public String getNumeroId() {
+        return numeroId;
     }
+
+    public void setNumeroId(String numeroId) {
+        this.numeroId = numeroId;
+    }   
 
     public String getTipoId() {
         return tipoId;
@@ -145,12 +157,12 @@ public class Tercero implements Serializable {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Metodos sobreescritos">
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 29 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 17 * hash + (this.numeroId != null ? this.numeroId.hashCode() : 0);
         hash = 17 * hash + (this.tipoId != null ? this.tipoId.hashCode() : 0);
         hash = 17 * hash + (this.digitoVerificacion != null ? this.digitoVerificacion.hashCode() : 0);
         hash = 17 * hash + (this.nombres != null ? this.nombres.hashCode() : 0);
@@ -170,7 +182,10 @@ public class Tercero implements Serializable {
             return false;
         }
         final Tercero other = (Tercero) obj;
-        if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
+         if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
+            return false;
+        }
+        if ((this.numeroId == null) ? (other.numeroId != null) : !this.numeroId.equals(other.numeroId)) {
             return false;
         }
         if ((this.tipoId == null) ? (other.tipoId != null) : !this.tipoId.equals(other.tipoId)) {
@@ -199,8 +214,7 @@ public class Tercero implements Serializable {
 
     @Override
     public String toString() {
-        return "Tercero{" + "id=" + id + ", tipoId=" + tipoId + ", digitoVerificacion=" + digitoVerificacion + ", nombres=" + nombres + ", apellidos=" + apellidos + ", direccion=" + direccion + ", estado=" + estado + ", tipo=" + tipo + '}';
+        return "Tercero{" + "id=" + id+ "numeroId=" + numeroId + ", tipoId=" + tipoId + ", digitoVerificacion=" + digitoVerificacion + ", nombres=" + nombres + ", apellidos=" + apellidos + ", direccion=" + direccion + ", estado=" + estado + ", tipo=" + tipo + '}';
     }
     //</editor-fold>
-
 }

@@ -80,8 +80,7 @@ public class DetalleDocumento implements Serializable {
     public DetalleDocumento() {
     }
 
-    public DetalleDocumento(Long id, Documento documento, Articulo articulo, Integer cantidad, Double valor, Double reteica, Double reteiva, Double retefuente, String tipoReteiva, String tipoReteica, String tipoRetefuente, Float ivaPtj, Double iva, Float descuentoPtj, Double descuento, Double subtotal, Double total, String descripcion, Integer estado) {
-        this.id = id;
+    public DetalleDocumento(Documento documento, Articulo articulo, Integer cantidad, Double valor, Double reteica, Double reteiva, Double retefuente, String tipoReteiva, String tipoReteica, String tipoRetefuente, Float ivaPtj, Double iva, Float descuentoPtj, Double descuento, Double subtotal, Double total, String descripcion, Integer estado) {
         this.documento = documento;
         this.articulo = articulo;
         this.cantidad = cantidad;

@@ -34,8 +34,7 @@ public class TipoTercero implements Serializable {
     public TipoTercero() {
     }
 
-    public TipoTercero(Integer id, String nombre, String descripcion, Integer estado) {
-        this.id = id;
+    public TipoTercero(String nombre, String descripcion, Integer estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.estado = estado;

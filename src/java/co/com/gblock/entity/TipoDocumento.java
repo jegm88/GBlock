@@ -43,8 +43,7 @@ public class TipoDocumento implements Serializable {
     public TipoDocumento() {
     }
 
-    public TipoDocumento(Integer id, String nombre, String descripcion, Long indice, String formatoCodigo, Short impactoInventario, Integer estado) {
-        this.id = id;
+    public TipoDocumento(String nombre, String descripcion, Long indice, String formatoCodigo, Short impactoInventario, Integer estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.indice = indice;

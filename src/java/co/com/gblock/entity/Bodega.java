@@ -35,8 +35,7 @@ public class Bodega implements Serializable {
     public Bodega() {
     }
 
-    public Bodega(Integer id, String nombre, String descripcion, String ubicacion, Integer estado) {
-        this.id = id;
+    public Bodega(String nombre, String descripcion, String ubicacion, Integer estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.ubicacion = ubicacion;

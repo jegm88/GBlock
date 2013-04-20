@@ -34,8 +34,7 @@ public class Perfil implements Serializable {
     public Perfil() {
     }
 
-    public Perfil(Integer id, String nombre, String descripcion, Integer estado) {
-        this.id = id;
+    public Perfil(String nombre, String descripcion, Integer estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.estado = estado;

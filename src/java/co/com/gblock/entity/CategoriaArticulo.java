@@ -34,8 +34,7 @@ public class CategoriaArticulo implements Serializable {
     public CategoriaArticulo() {
     }
 
-    public CategoriaArticulo(Integer id, String nombre, String descripcion, Integer estado) {
-        this.id = id;
+    public CategoriaArticulo(String nombre, String descripcion, Integer estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.estado = estado;

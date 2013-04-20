@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.gblock.services.InterfaceServicios;
+package co.com.gblock.services.interfaceServicios;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface IGenericaServicio<Entity, Key> {
     
     void modificar(Entity obj);
     
-    void elimiinar(Key id, Class clazz);
+    void eliminar(Key id, Class clazz);
     
     List<Entity> listarTodo(Class clazz);
 }

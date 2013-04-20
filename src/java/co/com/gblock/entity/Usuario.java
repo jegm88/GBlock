@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -29,10 +28,8 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
     @Size(min = 1, max = 50)
     private String nick;
-    
     @Size(min = 1, max = 50)
     private String password;
     @JoinColumn(name = "tercero", referencedColumnName = "id")
@@ -52,8 +49,7 @@ public class Usuario implements Serializable {
         this.password = password;
     }
     
-    public Usuario(Integer id, String nick, String password, Tercero tercero, Perfil perfil, Integer estado) {
-        this.id = id;
+    public Usuario(String nick, String password, Tercero tercero, Perfil perfil, Integer estado) {
         this.nick = nick;
         this.password = password;
         this.tercero = tercero;

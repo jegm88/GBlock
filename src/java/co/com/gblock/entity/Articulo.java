@@ -54,8 +54,7 @@ public class Articulo implements Serializable {
     public Articulo() {
     }
 
-    public Articulo(Long id, String nombre, String descripcion, String marca, String modelo, Double valorUnit, Float ivaPtj, Double iva, CategoriaArticulo categoria, String observaciones, Integer estado) {
-        this.id = id;
+    public Articulo(String nombre, String descripcion, String marca, String modelo, Double valorUnit, Float ivaPtj, Double iva, CategoriaArticulo categoria, String observaciones, Integer estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.marca = marca;
