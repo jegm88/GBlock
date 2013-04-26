@@ -5,13 +5,13 @@
 package co.com.gblock.services.interfaceServicios;
 
 import co.com.gblock.entity.Correo;
-import javax.jws.WebService;
+import javax.ejb.Local;
 
 /**
  *
  * @author FGulfo
  */
-@WebService(name="ICorreoServicio")
+@Local
 public interface ICorreoServicio extends IGenericaServicio<Correo, String> {
     
 }

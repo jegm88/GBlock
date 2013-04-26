@@ -5,13 +5,13 @@
 package co.com.gblock.services.interfaceServicios;
 
 import co.com.gblock.entity.FormaPago;
-import javax.jws.WebService;
+import javax.ejb.Local;
 
 /**
  *
  * @author FGulfo
  */
-@WebService(name="IFormaPagoServicio")
+@Local
 public interface IFormaPagoServicio extends IGenericaServicio<FormaPago, Integer> {
     
 }

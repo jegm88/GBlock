@@ -5,13 +5,13 @@
 package co.com.gblock.services.interfaceServicios;
 
 import co.com.gblock.entity.Arqueo;
-import javax.jws.WebService;
+import javax.ejb.Local;
 
 /**
  *
  * @author FGulfo
  */
-@WebService(name="IArqueoServicio")
+@Local
 public interface IArqueoServicio extends IGenericaServicio<Arqueo, Long> {
     
 }

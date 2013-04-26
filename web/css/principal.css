@@ -1,0 +1,41 @@
+/* 
+    Document   : principal
+    Created on : 26/04/2013, 03:14:12 PM
+    Author     : Jhonny
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+header{
+    background: rgba(10,10,10,0.66);
+    border-radius: 0.6em;
+    -webkit-border-radius:0.6em;
+    box-shadow: rgba(0,0,0,0.9) 10px,10px,10px;
+    color: #EEE;
+    margin: 0em auto;
+    padding: 1em;
+    width: 90%;
+    height: 10%;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+#content{
+    background: rgba(10,10,10,0.66);
+    border-radius: 0.6em;
+    -webkit-border-radius:0.6em;
+    box-shadow: rgba(0,0,0,0.9) 10px,10px,10px;
+    color: #EEE;
+    margin: 2em auto;
+    padding: 1em;
+    width: 80%;
+    height: 90%;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+#content #tabla{
+    width: auto;
+}

@@ -5,13 +5,12 @@
 package co.com.gblock.services.interfaceServicios;
 
 import co.com.gblock.entity.Tercero;
-import javax.jws.WebService;
-
+import javax.ejb.Local;
 /**
  *
  * @author FGulfo
  */
-@WebService(name="ITerceroServicio")
+@Local
 public interface ITerceroServicio extends IGenericaServicio<Tercero, String> {
     
 }

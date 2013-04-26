@@ -5,13 +5,13 @@
 package co.com.gblock.services.interfaceServicios;
 
 import co.com.gblock.entity.Documento;
-import javax.jws.WebService;
+import javax.ejb.Local;
 
 /**
  *
  * @author FGulfo
  */
-@WebService(name="IDocumentoServicio")
+@Local
 public interface IDocumentoServicio extends IGenericaServicio<Documento, Long> {
     
 }

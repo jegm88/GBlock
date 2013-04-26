@@ -31,24 +31,22 @@ public class LoginEBean implements Serializable{
     }    
     
     public String login(){
-        LOGGER.log(Level.INFO, "Intentando logear con el usuario", usuario);
+        LOGGER.log(Level.INFO, "Intentando logear con el usuario {0}", usuario.getNick());
         
         Usuario usuarioLogin = usuarioServicio.login(usuario);
         
         if(usuarioLogin != null){
-            LOGGER.info("Usuario logeado "+ usuario.getNick() +" exitosamente!");
+            LOGGER.log(Level.INFO, "Usuario {0} logeado exitosamente!", usuario.getNick());
             usuario = usuarioLogin;
-            
-            
-            return "Principal.jsp";
+            return "principal.xhtml";
         }else{
-            return "Error.jsp";
+            LOGGER.log(Level.WARNING, "Login incorrecto, usuario o contraseña inválido!");
+            return regresar();
         }
     }
     
     public String regresar(){
-        
-        return "index.jsp";
+        return "index.xhtml";
     }
 
     public Usuario getUsuario() {
@@ -57,8 +55,5 @@ public class LoginEBean implements Serializable{
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-    
-    
-    
+    }   
 }

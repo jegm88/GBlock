@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+        <title>Principal</title>
+    </h:head>
+    <h:body>        
+        <h:form>
+            <header>
+                Usuario: <h:outputText value="#{loginEBean.usuario.nick}"/>
+                <h:commandLink value="Cerrar Sesion" action="#{loginEBean.regresar()}"/>
+            </header>
+        </h:form>
+        <h:form>
+            <div id="content">
+                <table id="tabla">
+                    <tr>
+                        <td><h:commandLink value="Venta" action="#{loginEBean.regresar()}"/></td>
+                        <td><h:commandLink value="Compra" action="#{loginEBean.regresar()}"/></td>
+                        <td><h:commandLink value="Reportes" action="#{loginEBean.regresar()}"/></td>
+                    </tr>
+                    <tr>
+                        <td><h:commandLink value="Cierre de Caja" action="#{loginEBean.regresar()}"/></td>
+                        <td><h:commandLink value="Cartera" action="#{loginEBean.regresar()}"/></td>
+                        <td><h:commandLink value="Configuracion" action="#{loginEBean.regresar()}"/></td>
+                    </tr>
+
+                </table>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

@@ -5,13 +5,13 @@
 package co.com.gblock.services.interfaceServicios;
 
 import co.com.gblock.entity.Bodega;
-import javax.jws.WebService;
+import javax.ejb.Local;
 
 /**
  *
  * @author FGulfo
  */
-@WebService(name="IBodegaServicio")
+@Local
 public interface IBodegaServicio extends IGenericaServicio<Bodega, Integer> {
     
 }
