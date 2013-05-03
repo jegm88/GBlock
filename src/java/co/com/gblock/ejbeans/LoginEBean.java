@@ -15,6 +15,9 @@ import javax.faces.bean.SessionScoped;
 
 /**
  *
+ * 
+ * jaas (inv)
+ * 
  * @author FGulfo
  */
 @ManagedBean

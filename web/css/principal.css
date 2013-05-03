@@ -11,6 +11,7 @@ root {
 }
 
 header{
+    text-align: right;
     background: rgba(10,10,10,0.66);
     border-radius: 0.6em;
     -webkit-border-radius:0.6em;
@@ -38,4 +39,32 @@ header{
 
 #content #tabla{
     width: auto;
+}
+
+.buAction{
+    margin: 0em auto;
+    padding: 0em;
+    border-radius: 0.6em;
+    font-size: 0.8em;
+}
+
+.registros{
+    text-align: center;
+    margin: 0em auto;
+    padding: 0em;
+    left: 20em;
+    position: relative;
+    top: 5em;
+    font-size: 1em;
+}
+
+.menuaccion{
+    margin: 0;
+    left: 5em;
+    position: fixed;
+    padding: 0;
+    top: 3em;
+    border-radius: 0.6em;
+    border: solid cornflowerblue;
+    font-size: 0.9em;
 }

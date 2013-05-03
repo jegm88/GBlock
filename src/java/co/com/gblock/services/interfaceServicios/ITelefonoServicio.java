@@ -12,6 +12,6 @@ import javax.ejb.Local;
  * @author FGulfo
  */
 @Local
-public interface ITelefonoServicio extends IGenericaServicio<Telefono, String> {
+public interface ITelefonoServicio extends IGenericaServicio<Telefono, Long> {
     
 }

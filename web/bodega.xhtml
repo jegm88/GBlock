@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+        
+    <h:head>
+        <title>Bodega</title>
+        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+        
+    <h:body>
+        
+        <h:form>
+            <header class="buAction">
+                <p:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
+                    <p:menuitem value="Configurar Cuenta" title="configurar cuenta"/>
+                    <p:menuitem value="LogOut" action="#{loginEBean.regresar()}" title="cerrar sesion" ajax="false"/>
+                </p:menuButton>
+            </header>
+        </h:form>
+        
+        <h:form id="fregistro">
+            <div id="regbod" class="registros">
+                <p:panelGrid columns="2">
+                    <f:facet name="header">
+                        Bodega
+                    </f:facet>
+                    <h:outputLabel value="Nombre: "/>
+                    <p:inputText value="#{bodegaEBean.bodega.nombre}"/>
+                    
+                    <h:outputLabel value="Ubicacion: "/>
+                    <p:inputText value="#{bodegaEBean.bodega.ubicacion}"/>
+                    
+                    <h:outputLabel value="Descripcion: "/>
+                    <p:inputTextarea value="#{bodegaEBean.bodega.descripcion}"/>
+                    
+                </p:panelGrid>
+            </div>
+                
+                <div id="menuAcc" class="menuaccion">
+                    <p:menu styleClass="menuaccion">
+                        <p:menuitem value="Nuevo" action="bodega" ajax="false"/>
+                        <p:menuitem value="Guardar" action="#{bodegaEBean.guardar()}" ajax="false"/>
+                        <p:menuitem value="Consultar" action="consultaBodega" ajax="false" icon="img/magnifier.png"/>
+                        <p:menuitem value="Regresar" actionListener="principal" ajax="false"/>
+                    </p:menu>
+                </div>
+                
+        </h:form>
+        
+    </h:body>
+        
+</html>
+

@@ -4,8 +4,8 @@
  */
 package co.com.gblock.services.implementacionServicios;
 
-import co.com.gblock.services.interfaceServicios.IUsuarioServicio;
 import co.com.gblock.entity.Usuario;
+import co.com.gblock.services.interfaceServicios.IUsuarioServicio;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;

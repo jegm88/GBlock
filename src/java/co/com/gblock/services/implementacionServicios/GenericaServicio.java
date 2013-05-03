@@ -53,7 +53,7 @@ public abstract class GenericaServicio<Entity, Key> implements IGenericaServicio
         StringBuilder jpql = new StringBuilder();
         jpql.append("SELECT o FROM ");
         jpql.append(clazz.getSimpleName());
-        jpql.append("o");
+        jpql.append(" o ");
         logger.log(Level.INFO, "Listando todas las entidades ({0})", clazz.getSimpleName());
         Query query = entityManager.createQuery(jpql.toString());
         entities = query.getResultList();

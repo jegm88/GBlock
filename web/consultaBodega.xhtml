@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Consulta de Bodegas</title>
+        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+            <header class="buAction">
+                <p:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
+                    <p:menuitem value="Configurar Cuenta" title="configurar cuenta"/>
+                    <p:menuitem value="LogOut" action="#{loginEBean.regresar()}" title="cerrar sesion" ajax="false"/>
+                </p:menuButton>
+            </header>
+        </h:form>
+            
+        <h:form id="flistabodega">
+            <p:panel header="Lista de Bodegas">
+               
+                <p:dataTable value="#{bodegaEBean.listaBodegas}" var="bodega" paginator="true" rows="5">
+                    
+                    <p:column headerText="Nombre" >
+                        #{bodega.nombre}
+                    </p:column>
+                    <p:column headerText="Ubicacion">
+                        #{bodega.ubicacion}
+                    </p:column>
+                    <p:column headerText="Descripcion">
+                        #{bodega.descripcion}
+                    </p:column>
+                    <p:column headerText="Accion" style="text-align: center;">
+                        <p:commandButton value="Visualizar" update="mod" immediate="true"
+                                         oncomplete="dlgModificar.show();"
+                                         actionListener="#{bodegaEBean.seleccionar(bodega)}"/>
+                        <p:commandButton value="Eliminar" actionListener="#{bodegaEBean.eliminar(bodega)}"
+                                         update=":flistabodega"/>
+                    </p:column>
+                
+                </p:dataTable>
+                
+            </p:panel>
+        </h:form>
+        
+        <h:form id="mod">
+            <p:dialog widgetVar="dlgModificar" closable="true"
+                      modal="true" header="Modificar Bodega" id="di">
+                <p:panelGrid columns="2">
+    
+                    <h:outputLabel value="Nombre: "/>
+                    <p:inputText value="#{bodegaEBean.bodega.nombre}" required="true"/>
+                    
+                    <h:outputLabel value="Ubicacion: "/>
+                    <p:inputText value="#{bodegaEBean.bodega.ubicacion}" required="true"/>
+                    
+                    <h:outputLabel value="Descripcion: "/>
+                    <p:inputTextarea value="#{bodegaEBean.bodega.descripcion}" required="true"/>
+                    
+                </p:panelGrid>
+                <p:commandButton value="modificar" onsuccess="dlgModificar.hide()"
+                                 update=":flistabodega" action="#{bodegaEBean.guardar()}"/>
+                <p:commandButton value="cancelar" onclick="dlgModificar.hide();" type="reset"/>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+

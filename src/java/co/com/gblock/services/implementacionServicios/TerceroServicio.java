@@ -13,6 +13,6 @@ import javax.ejb.Stateless;
  * @author FGulfo
  */
 @Stateless
-public class TerceroServicio extends GenericaServicio<Tercero, String> implements ITerceroServicio{
+public class TerceroServicio extends GenericaServicio<Tercero, Long> implements ITerceroServicio{
     
 }

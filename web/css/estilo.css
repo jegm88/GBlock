@@ -31,3 +31,22 @@ body{
     width:100px;
     display: inline;
 }
+
+.buAction{
+    margin: 0em auto;
+    padding: 0em;
+    border-radius: 0.6em;
+    border: solid cornflowerblue;
+    font-size: 0.7em;
+}
+.menuaccion{
+    margin: 0;
+    left: 4em;
+    position: fixed;
+    padding: 0;
+    top: 4em;
+    width: 9em;
+    border-radius: 0.6em;
+    border: solid cornflowerblue;
+    font-size: 0.7em;
+}

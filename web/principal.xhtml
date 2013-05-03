@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
@@ -9,9 +11,11 @@
     </h:head>
     <h:body>        
         <h:form>
-            <header>
-                Usuario: <h:outputText value="#{loginEBean.usuario.nick}"/>
-                <h:commandLink value="Cerrar Sesion" action="#{loginEBean.regresar()}"/>
+            <header class="buAction">
+                <p:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
+                    <p:menuitem value="Configurar Cuenta" title="configurar cuenta"/>
+                    <p:menuitem value="LogOut" action="#{loginEBean.regresar()}" title="cerrar sesion"/>
+                </p:menuButton>
             </header>
         </h:form>
         <h:form>
@@ -25,7 +29,7 @@
                     <tr>
                         <td><h:commandLink value="Cierre de Caja" action="#{loginEBean.regresar()}"/></td>
                         <td><h:commandLink value="Cartera" action="#{loginEBean.regresar()}"/></td>
-                        <td><h:commandLink value="Configuracion" action="#{loginEBean.regresar()}"/></td>
+                        <td><h:commandLink value="Configuracion" action="bodega"/></td>
                     </tr>
 
                 </table>

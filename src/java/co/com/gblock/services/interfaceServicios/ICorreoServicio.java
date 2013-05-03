@@ -12,6 +12,6 @@ import javax.ejb.Local;
  * @author FGulfo
  */
 @Local
-public interface ICorreoServicio extends IGenericaServicio<Correo, String> {
+public interface ICorreoServicio extends IGenericaServicio<Correo, Long> {
     
 }

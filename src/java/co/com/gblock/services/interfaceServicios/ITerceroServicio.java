@@ -11,6 +11,6 @@ import javax.ejb.Local;
  * @author FGulfo
  */
 @Local
-public interface ITerceroServicio extends IGenericaServicio<Tercero, String> {
+public interface ITerceroServicio extends IGenericaServicio<Tercero, Long> {
     
 }
