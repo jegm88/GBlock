@@ -43,7 +43,6 @@ public class TerceroEBean implements Serializable {
     private void init() {
 
         LOGGER.log(Level.INFO, "Ejecutando metodo init ({0})", this.getClass().getSimpleName());
-
         listar();
     }
 

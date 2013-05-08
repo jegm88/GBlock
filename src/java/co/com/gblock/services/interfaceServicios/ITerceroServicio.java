@@ -12,5 +12,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface ITerceroServicio extends IGenericaServicio<Tercero, Long> {
-    
+        Tercero consultarPorNumeroId(String id);
 }
