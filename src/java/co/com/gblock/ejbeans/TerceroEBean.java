@@ -5,7 +5,9 @@
 package co.com.gblock.ejbeans;
 
 import co.com.gblock.entity.Tercero;
+import co.com.gblock.entity.TipoTercero;
 import co.com.gblock.services.interfaceServicios.ITerceroServicio;
+import co.com.gblock.services.interfaceServicios.ITipoTerceroServicio;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,8 +28,11 @@ public class TerceroEBean implements Serializable {
     private static final Logger LOGGER = Logger.getLogger("TerceroEBean");
     @EJB
     private ITerceroServicio terceroServicio;
+    @EJB
+    private ITipoTerceroServicio tipoTerceroServicio;
     private Tercero tercero;
     private List<Tercero> listaTerceros;
+    private List<TipoTercero> listaTipoTerceros;
 
     public TerceroEBean() {
 
@@ -72,6 +77,7 @@ public class TerceroEBean implements Serializable {
         LOGGER.log(Level.INFO, "Actualizando...");
 
         listaTerceros = terceroServicio.listarTodo(Tercero.class);
+        listaTipoTerceros = tipoTerceroServicio.listarTodo(TipoTercero.class);
     }
 
     public void seleccionar(Tercero tercero) {
@@ -110,4 +116,12 @@ public class TerceroEBean implements Serializable {
     public void setTercero(Tercero tercero) {
         this.tercero = tercero;
     }
+
+    public List<TipoTercero> getListaTipoTerceros() {
+        return listaTipoTerceros;
+    }
+
+    public void setListaTipoTerceros(List<TipoTercero> listaTipoTerceros) {
+        this.listaTipoTerceros = listaTipoTerceros;
+    }   
 }
