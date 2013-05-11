@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ppctu="http://primefaces.prime.com.tr/ui">
     <h:head>
-        <title>Consulta de Bodegas</title>
+        <title>Consulta de Tipo de Tercero</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
@@ -18,36 +18,34 @@
                 </ppctu:menuButton>
             </header>
         </h:form>
-            
-        <h:form id="flistabodega">
-            <ppctu:panel header="Lista de Bodegas" style="margin: 5em; padding: 2em;">
+        
+        <h:form id="flistattercero">
+            <ppctu:panel header="Lista de Tipos de Terceros" style="margin: 5em; padding: 2em;">
                
-                <ppctu:dataTable value="#{bodegaEBean.listaBodegas}" var="bodega" rows="5">
+                <ppctu:dataTable value="#{tipoTerceroEBean.listaTipoTerceros}" var="ttercero" rows="5">
                     
                     <ppctu:column headerText="Nombre" >
-                        #{bodega.nombre}
+                        #{ttercero.nombre}
                     </ppctu:column>
-                    <ppctu:column headerText="Ubicacion">
-                        #{bodega.ubicacion}
-                    </ppctu:column>
+                    
                     <ppctu:column headerText="Descripcion">
-                        #{bodega.descripcion}
+                        #{ttercero.descripcion}
                     </ppctu:column>
+                    
                     <ppctu:column headerText="Accion" style="text-align: center;">
-                        <ppctu:commandButton value="Visualizar" immediate="true" action="bodega" ajax="false" 
-                                         actionListener="#{bodegaEBean.seleccionar(bodega)}"
-                                         />
-                        <ppctu:commandButton value="Eliminar" actionListener="#{bodegaEBean.eliminar(bodega)}"
-                                         update=":flistabodega"/>
+                        <ppctu:commandButton value="Visualizar" update="modtt" immediate="true"
+                                         oncomplete="dlgModificar.show();"
+                                         actionListener="#{tipoTerceroEBean.seleccionar(ttercero)}"/>
+                        <ppctu:commandButton value="Eliminar" actionListener="#{tipoTerceroEBean.eliminar(ttercero)}"
+                                         update=":flistattercero"/>
                     </ppctu:column>
                 
                 </ppctu:dataTable>
                 
-            </ppctu:panel>
-            
+            </ppctu:panel>            
             <div id="menuAcc" class="menuaccion">
                 <ppctu:menu styleClass="menuaccion">
-                    <ppctu:menuitem value="Nuevo" action="bodega" ajax="false"/>
+                    <ppctu:menuitem value="Nuevo" action="tipoTercero" ajax="false"/>
                         <ppctu:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
                 </ppctu:menu>
                 </div>

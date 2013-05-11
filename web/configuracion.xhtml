@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ppctu="http://primefaces.prime.com.tr/ui">
+    <h:head>
+        <title>Configuracion</title>
+        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+            <header class="buAction">
+                <ppctu:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
+                    <ppctu:menuitem value="Configurar Cuenta"/>
+                    <ppctu:menuitem value="LogOut" action="#{loginEBean.regresar()}" ajax="false"/>
+                </ppctu:menuButton>
+            </header>
+        </h:form>
+        
+        <h:form>
+            <ppctu:menu>
+                <ppctu:menuitem value="Bodega" action="bodega" ajax="false"/>
+                <ppctu:menuitem value="Tipo de Tercero" action="tipoTercero" ajax="false"/>
+                <ppctu:menuitem value="Tercero" action="tercero" ajax="false"/>
+                <ppctu:menuitem value="Usuario" action="usuario" ajax="false"/>
+                <ppctu:menuitem value="Tipo de Forma de Pago" action="tipoFormaPago" ajax="false"/>
+                <ppctu:menuitem value="Tipo de Documento" action="tipoDocumento" ajax="false"/>
+                <ppctu:menuitem value="Perfil" action="perfil" ajax="false"/>
+            </ppctu:menu>
+
+        </h:form>
+        
+    </h:body>
+</html>
+

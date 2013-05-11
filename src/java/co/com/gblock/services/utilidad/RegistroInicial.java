@@ -41,7 +41,7 @@ public class RegistroInicial {
         Bodega bodega = new Bodega("Principal", "", "Av. Pedro Heredia", 1);
         Perfil perfil = new Perfil("Admnistrador", "Acceso a todo el sistema", 1);
         FormaPago formaPago = new FormaPago("Efectivo", "dinero a la mano ", 1);
-        TipoTercero tipoTercero = new TipoTercero("Cliente", "Posible comparador de productos", 1);
+        TipoTercero tipoTercero = new TipoTercero("Cliente", "Posible comprarador de productos", 1);
         CategoriaArticulo categoriaArticulo = new CategoriaArticulo("Amortiguador", "", 1);
         
         try{

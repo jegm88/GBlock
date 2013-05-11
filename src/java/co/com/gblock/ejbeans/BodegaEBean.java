@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -20,7 +21,7 @@ import javax.faces.bean.ViewScoped;
  * @author FGulfo
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class BodegaEBean implements Serializable{
     private static final Logger LOGGER = Logger.getLogger("BodegaEBean");
     

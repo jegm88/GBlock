@@ -3,14 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ppctu="http://primefaces.prime.com.tr/ui"
-      xmlns:ppctt="http://primefaces.prime.com.tr/touch">
-        
+      xmlns:ppctu="http://primefaces.prime.com.tr/ui">
     <h:head>
-        <title>Bodega</title>
+        <title>Tipo de Tercero</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </h:head>
-        
     <h:body>
         
         <h:form>
@@ -22,37 +19,33 @@
             </header>
         </h:form>
         
-        <h:form id="fbodega">
-            <div id="regbod" class="registros">
+        <h:form id="ftter">
+            
+            <div id="regter" class="registros">
                 <h:panelGrid columns="2">
                     <f:facet name="header">
-                        Bodega
+                        Tipo de Tercero
                     </f:facet>
                     
                     <h:outputText value="Nombre"/>
-                    <ppctu:inputText id="nombre" value="#{bodegaEBean.bodega.nombre}"/>
-                    
-                    <h:outputText value="Ubicacion"/>
-                    <ppctu:inputText id="ubicacion" value="#{bodegaEBean.bodega.ubicacion}"/>
+                    <ppctu:inputText value="#{tipoTerceroEBean.tipoTercero.nombre}"/>
                     
                     <h:outputText value="Descripcion"/>
-                    <ppctu:inputTextarea id="descripcion" value="#{bodegaEBean.bodega.descripcion}"/>
-                    
+                    <ppctu:inputText value="#{tipoTerceroEBean.tipoTercero.descripcion}"/> 
                 </h:panelGrid>
             </div>
-                
-                <div id="menuAcc" class="menuaccion">
-                    <ppctu:menu styleClass="menuaccion">
-                        <ppctu:menuitem value="Nuevo" action="bodega" ajax="false"/>
-                        <ppctu:menuitem value="Guardar" action="#{bodegaEBean.guardar()}" ajax="false" />
-                        <ppctu:menuitem value="Modificar" action="#{bodegaEBean.guardar()}" ajax="false"/>
-                        <ppctu:menuitem value="Consultar" action="consultaBodega" ajax="false" immediate="true" icon="img/magnifier.png"/>
+            
+            <div id="menuAcc" class="menuaccion">
+                <ppctu:menu styleClass="menuaccion">
+                        <ppctu:menuitem value="Nuevo" action="tipoTercero" ajax="false"/>
+                        <ppctu:menuitem value="Guardar" action="#{tipoTerceroEBean.guardar()}" ajax="false"/>
+                        <ppctu:menuitem value="Consultar" action="consultaTipoTercero" ajax="false" immediate="true" icon="img/magnifier.png"/>
                         <ppctu:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
                     </ppctu:menu>
                 </div>
-                
+            
         </h:form>
         
     </h:body>
-        
 </html>
+
