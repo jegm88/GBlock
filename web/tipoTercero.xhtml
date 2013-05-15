@@ -3,49 +3,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ppctu="http://primefaces.prime.com.tr/ui">
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Tipo de Tercero</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-        
         <h:form>
             <header class="buAction">
-                <ppctu:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
-                    <ppctu:menuitem value="Configurar Cuenta"/>
-                    <ppctu:menuitem value="LogOut" action="#{loginEBean.regresar()}" ajax="false"/>
-                </ppctu:menuButton>
+                <p:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
+                    <p:menuitem value="Configurar Cuenta"/>
+                    <p:menuitem value="LogOut" action="#{loginEBean.regresar()}" ajax="false"/>
+                </p:menuButton>
             </header>
         </h:form>
-        
         <h:form id="ftter">
-            
             <div id="regter" class="registros">
                 <h:panelGrid columns="2">
-                    <f:facet name="header">
-                        Tipo de Tercero
-                    </f:facet>
-                    
+                    <f:facet name="header">Tipo de Tercero</f:facet>
                     <h:outputText value="Nombre"/>
-                    <ppctu:inputText value="#{tipoTerceroEBean.tipoTercero.nombre}"/>
-                    
+                    <p:inputText value="#{tipoTerceroEBean.tipoTercero.nombre}"/>
                     <h:outputText value="Descripcion"/>
-                    <ppctu:inputText value="#{tipoTerceroEBean.tipoTercero.descripcion}"/> 
+                    <p:inputText value="#{tipoTerceroEBean.tipoTercero.descripcion}"/> 
                 </h:panelGrid>
             </div>
-            
             <div id="menuAcc" class="menuaccion">
-                <ppctu:menu styleClass="menuaccion">
-                        <ppctu:menuitem value="Nuevo" action="tipoTercero" ajax="false"/>
-                        <ppctu:menuitem value="Guardar" action="#{tipoTerceroEBean.guardar()}" ajax="false"/>
-                        <ppctu:menuitem value="Consultar" action="consultaTipoTercero" ajax="false" immediate="true" icon="img/magnifier.png"/>
-                        <ppctu:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
-                    </ppctu:menu>
-                </div>
-            
+                <p:menu styleClass="menuaccion">
+                    <p:menuitem value="Nuevo" action="tipoTercero" ajax="false"/>
+                    <p:menuitem value="Guardar" action="#{tipoTerceroEBean.guardar()}" ajax="false"/>
+                    <p:menuitem value="Consultar" action="consultaTipoTercero" ajax="false" immediate="true" icon="img/magnifier.png"/>
+                    <p:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
+                </p:menu>
+            </div>            
         </h:form>
-        
     </h:body>
 </html>
 

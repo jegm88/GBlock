@@ -2,8 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ppctu="http://primefaces.prime.com.tr/ui">
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Consulta de Tipo de Tercero</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
@@ -12,42 +11,42 @@
         
         <h:form>
             <header class="buAction">
-                <ppctu:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
-                    <ppctu:menuitem value="Configurar Cuenta"/>
-                    <ppctu:menuitem value="LogOut" action="#{loginEBean.regresar()}" ajax="false"/>
-                </ppctu:menuButton>
+                <p:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
+                    <p:menuitem value="Configurar Cuenta"/>
+                    <p:menuitem value="LogOut" action="#{loginEBean.regresar()}" ajax="false"/>
+                </p:menuButton>
             </header>
         </h:form>
         
         <h:form id="flistattercero">
-            <ppctu:panel header="Lista de Tipos de Terceros" style="margin: 5em; padding: 2em;">
+            <p:panel header="Lista de Tipos de Terceros" style="margin: 5em; padding: 2em;">
                
-                <ppctu:dataTable value="#{tipoTerceroEBean.listaTipoTerceros}" var="ttercero" rows="5">
+                <p:dataTable value="#{tipoTerceroEBean.listaTipoTerceros}" var="ttercero" rows="5">
                     
-                    <ppctu:column headerText="Nombre" >
+                    <p:column headerText="Nombre" >
                         #{ttercero.nombre}
-                    </ppctu:column>
+                    </p:column>
                     
-                    <ppctu:column headerText="Descripcion">
+                    <p:column headerText="Descripcion">
                         #{ttercero.descripcion}
-                    </ppctu:column>
+                    </p:column>
                     
-                    <ppctu:column headerText="Accion" style="text-align: center;">
-                        <ppctu:commandButton value="Visualizar" update="modtt" immediate="true"
+                    <p:column headerText="Accion" style="text-align: center;">
+                        <p:commandButton value="Visualizar" update="modtt" immediate="true"
                                          oncomplete="dlgModificar.show();"
                                          actionListener="#{tipoTerceroEBean.seleccionar(ttercero)}"/>
-                        <ppctu:commandButton value="Eliminar" actionListener="#{tipoTerceroEBean.eliminar(ttercero)}"
+                        <p:commandButton value="Eliminar" actionListener="#{tipoTerceroEBean.eliminar(ttercero)}"
                                          update=":flistattercero"/>
-                    </ppctu:column>
+                    </p:column>
                 
-                </ppctu:dataTable>
+                </p:dataTable>
                 
-            </ppctu:panel>            
+            </p:panel>            
             <div id="menuAcc" class="menuaccion">
-                <ppctu:menu styleClass="menuaccion">
-                    <ppctu:menuitem value="Nuevo" action="tipoTercero" ajax="false"/>
-                        <ppctu:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
-                </ppctu:menu>
+                <p:menu styleClass="menuaccion">
+                    <p:menuitem value="Nuevo" action="tipoTercero" ajax="false"/>
+                        <p:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
+                </p:menu>
                 </div>
         </h:form>
         

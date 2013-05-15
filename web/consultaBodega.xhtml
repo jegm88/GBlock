@@ -2,57 +2,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ppctu="http://primefaces.prime.com.tr/ui">
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Consulta de Bodegas</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </h:head>
+
     <h:body>
-        
         <h:form>
             <header class="buAction">
-                <ppctu:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
-                    <ppctu:menuitem value="Configurar Cuenta"/>
-                    <ppctu:menuitem value="LogOut" action="#{loginEBean.regresar()}" ajax="false"/>
-                </ppctu:menuButton>
+                <p:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
+                    <p:menuitem value="Configurar Cuenta"/>
+                    <p:menuitem value="LogOut" action="#{loginEBean.regresar()}" ajax="false"/>
+                </p:menuButton>
             </header>
         </h:form>
-            
         <h:form id="flistabodega">
-            <ppctu:panel header="Lista de Bodegas" style="margin: 5em; padding: 2em;">
-               
-                <ppctu:dataTable value="#{bodegaEBean.listaBodegas}" var="bodega" rows="5">
-                    
-                    <ppctu:column headerText="Nombre" >
+            <p:panel header="Lista de Bodegas" style="margin: 5em; padding: 2em;">
+                <p:dataTable value="#{bodegaEBean.listaBodegas}" var="bodega" rows="5">
+                    <p:column headerText="Nombre" >
                         #{bodega.nombre}
-                    </ppctu:column>
-                    <ppctu:column headerText="Ubicacion">
+                    </p:column>
+                    <p:column headerText="Ubicacion">
                         #{bodega.ubicacion}
-                    </ppctu:column>
-                    <ppctu:column headerText="Descripcion">
+                    </p:column>
+                    <p:column headerText="Descripcion">
                         #{bodega.descripcion}
-                    </ppctu:column>
-                    <ppctu:column headerText="Accion" style="text-align: center;">
-                        <ppctu:commandButton value="Visualizar" immediate="true" action="bodega" ajax="false" 
+                    </p:column>
+                    <p:column headerText="Accion" style="text-align: center;">
+                        <p:commandButton value="Visualizar" immediate="true" action="bodega" ajax="false" 
                                          actionListener="#{bodegaEBean.seleccionar(bodega)}"
                                          />
-                        <ppctu:commandButton value="Eliminar" actionListener="#{bodegaEBean.eliminar(bodega)}"
+                        <p:commandButton value="Eliminar" actionListener="#{bodegaEBean.eliminar(bodega)}"
                                          update=":flistabodega"/>
-                    </ppctu:column>
-                
-                </ppctu:dataTable>
-                
-            </ppctu:panel>
-            
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
             <div id="menuAcc" class="menuaccion">
-                <ppctu:menu styleClass="menuaccion">
-                    <ppctu:menuitem value="Nuevo" action="bodega" ajax="false"/>
-                        <ppctu:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
-                </ppctu:menu>
-                </div>
+                <p:menu styleClass="menuaccion">
+                    <p:menuitem value="Nuevo" action="bodega" ajax="false"/>
+                    <p:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
+                </p:menu>
+            </div>
         </h:form>
-        
     </h:body>
 </html>
-
