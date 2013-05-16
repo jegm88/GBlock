@@ -1,0 +1,52 @@
+/* 
+    Document   : login_estilo
+    Created on : 26/04/2013, 02:31:22 PM
+    Author     : Jhonny
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body{
+    background: #20B243;
+    color: #221;
+    font-family: "Verdana";
+    font-size: 16px;
+    margin: 0px;
+    text-align: right;
+}
+
+.content{
+    background: rgba(10,10,10,0.66);
+    border-radius: 0.6em;
+    -webkit-border-radius:0.6em;
+    box-shadow: rgba(0,0,0,0.9) 10px,10px,10px;
+    color: #EEE;
+    margin: 1em auto;
+    padding: 2em;
+    width: 250px;
+    text-align: center;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+.login_label{
+    width:100px;
+    display: inline;
+}
+
+.buAction{
+    margin: 0em auto;
+    padding: 0em;
+    border-radius: 0.6em;
+    border: solid cornflowerblue;
+    font-size: 0.7em;
+}
+.menuaccion{
+    margin: 0;
+    left: 4em;
+    position: fixed;
+    padding: 0;
+    top: 4em;
+    width: 9em;
+    border-radius: 0.6em;
+    border: solid cornflowerblue;
+    font-size: 0.7em;
+}

@@ -1,0 +1,18 @@
+/* 
+    Document   : principal
+    Created on : 26/04/2013, 03:14:12 PM
+    Author     : Jhonny
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#logo{
+    width:80px;
+    height:80px;
+    background: url(../img/gb.png);
+    float: left;
+}
+
+#mnUsuario{
+    float: right;
+}
