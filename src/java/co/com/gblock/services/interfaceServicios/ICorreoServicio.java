@@ -5,6 +5,8 @@
 package co.com.gblock.services.interfaceServicios;
 
 import co.com.gblock.entity.Correo;
+import co.com.gblock.entity.Tercero;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +15,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface ICorreoServicio extends IGenericaServicio<Correo, Long> {
-    
+        public List<Correo> consultarPorTercero(Tercero t);
 }

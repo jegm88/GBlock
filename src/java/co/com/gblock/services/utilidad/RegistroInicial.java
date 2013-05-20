@@ -8,9 +8,10 @@ import co.com.gblock.services.interfaceServicios.IBodegaServicio;
 import co.com.gblock.services.interfaceServicios.ICategoriaArticuloServicio;
 import co.com.gblock.services.interfaceServicios.IFormaPagoServicio;
 import co.com.gblock.services.interfaceServicios.IPerfilServicio;
-import co.com.gblock.services.interfaceServicios.ITipoTerceroServicio;
 import co.com.gblock.services.interfaceServicios.IUsuarioServicio;
 import co.com.gblock.entity.*;
+import co.com.gblock.services.interfaceServicios.ITerceroServicio;
+import co.com.gblock.services.interfaceServicios.ITipoDocumentoServicio;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -30,18 +31,30 @@ public class RegistroInicial {
     @EJB private IBodegaServicio bodegaServicio;
     @EJB private IPerfilServicio perfilServicio;
     @EJB private IFormaPagoServicio formaPagoServicio;
-    @EJB private ITipoTerceroServicio tipoTerceroServicio;
+    @EJB private ITerceroServicio terceroServicio;
+    @EJB private ITipoDocumentoServicio tipoDocumentoServicio;
     @EJB private ICategoriaArticuloServicio categoriaArticuloServicio;
     @EJB private IUsuarioServicio usuarioServicio;
     
     @PostConstruct
     private void init(){
         LOGGER.log(Level.INFO, "Inicio del metodo init ({0})", this.getClass().getSimpleName());
+        
         Usuario usuario = new Usuario("fgulfo", "flavio");
-        Bodega bodega = new Bodega("Principal", "", "Av. Pedro Heredia", 1);
         Perfil perfil = new Perfil("Admnistrador", "Acceso a todo el sistema", 1);
-        FormaPago formaPago = new FormaPago("Efectivo", "dinero a la mano ", 1);
-        TipoTercero tipoTercero = new TipoTercero("Cliente", "Posible comprarador de productos", 1);
+        
+        Bodega bodega = new Bodega("Principal", "", "", 1);
+
+        TipoDocumento tipo1 = new TipoDocumento("Venta", "Venta de Articulo", Long.valueOf(0), "FCT#", -1, 1);
+        TipoDocumento tipo2 = new TipoDocumento("Compra", "Compra de Articulo", Long.valueOf(0), "#", 1, 1);
+        
+        FormaPago formaPago = new FormaPago("Efectivo", "Dinero en efectivo", 1);
+        
+//        TipoTercero tipoTercero1 = new TipoTercero("Dueño", "Vendedor de productos", 1);
+//        TipoTercero tipoTercero2 = new TipoTercero("Cliente", "Posible comprarador de productos", 1);
+
+        Tercero dueno = new Tercero("0001","nit", 1, "gblock inc.", "", "", TipoTercero.DUEÑO, 1);
+        
         CategoriaArticulo categoriaArticulo = new CategoriaArticulo("Amortiguador", "", 1);
         
         try{
@@ -49,7 +62,13 @@ public class RegistroInicial {
             bodegaServicio.insertar(bodega);
             perfilServicio.insertar(perfil);
             formaPagoServicio.insertar(formaPago);
-            tipoTerceroServicio.insertar(tipoTercero);
+//            tipoTerceroServicio.insertar(tipoTercero1);
+//            tipoTerceroServicio.insertar(tipoTercero2);
+            tipoDocumentoServicio.insertar(tipo1);
+            tipoDocumentoServicio.insertar(tipo2);
+            
+            terceroServicio.insertar(dueno);
+            
             categoriaArticuloServicio.insertar(categoriaArticulo);
             
         }catch(Exception ex){

@@ -4,16 +4,18 @@
  */
 package co.com.gblock.entity;
 
+import co.com.gblock.services.utilidad.TipoTercero;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,7 +28,10 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "terceros")
-@NamedQuery(name = "Tercero.buscarPorNumeroId",query = "SELECT o FROM Tercero o WHERE o.numeroId = :numeroId")
+@NamedQueries({
+@NamedQuery(name = "Tercero.buscarPorNumeroId",query = "SELECT o FROM Tercero o WHERE o.numeroId = :numeroId"),
+@NamedQuery(name = "Tercero.listarPorTipo",query = "SELECT o FROM Tercero o WHERE o.tipo = :tipo")
+})
 public class Tercero implements Serializable {
 
     @Id
@@ -38,7 +43,7 @@ public class Tercero implements Serializable {
     private String numeroId;
     @Size(max = 50)
     private String tipoId;
-    private Short digitoVerificacion;
+    private Integer digitoVerificacion;
     @Size(max = 50)
     private String nombres;
     @Size(max = 50)
@@ -47,8 +52,7 @@ public class Tercero implements Serializable {
     private String direccion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tercero")
     private List<Telefono> telefonos;
-    @JoinColumn(name = "tipo", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @Enumerated(EnumType.ORDINAL)
     private TipoTercero tipo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tercero")
     private List<Correo> correos;
@@ -58,7 +62,18 @@ public class Tercero implements Serializable {
     public Tercero() {
     }
 
-    public Tercero(String numeroId, String tipoId, Short digitoVerificacion, String nombres, String apellidos, String direccion, List<Telefono> telefonos, TipoTercero tipo, List<Correo> correos, Integer estado) {
+    public Tercero(String numeroId, String tipoId, Integer digitoVerificacion, String nombres, String apellidos, String direccion, TipoTercero tipo, Integer estado) {
+        this.numeroId = numeroId;
+        this.tipoId = tipoId;
+        this.digitoVerificacion = digitoVerificacion;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.direccion = direccion;
+        this.tipo = tipo;
+        this.estado = estado;
+    }
+    
+    public Tercero(String numeroId, String tipoId, Integer digitoVerificacion, String nombres, String apellidos, String direccion, List<Telefono> telefonos, TipoTercero tipo, List<Correo> correos, Integer estado) {
         this.numeroId = numeroId;
         this.tipoId = tipoId;
         this.digitoVerificacion = digitoVerificacion;
@@ -96,11 +111,11 @@ public class Tercero implements Serializable {
         this.tipoId = tipoId;
     }
 
-    public Short getDigitoVerificacion() {
+    public Integer getDigitoVerificacion() {
         return digitoVerificacion;
     }
 
-    public void setDigitoVerificacion(Short digitoVerificacion) {
+    public void setDigitoVerificacion(Integer digitoVerificacion) {
         this.digitoVerificacion = digitoVerificacion;
     }
 

@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../css/layout.css" rel="stylesheet" type="text/css" />
         <link href="./../css/principal.css" rel="stylesheet" type="text/css" />
-        <title>Plantilla</title>
+        <title><ui:insert name="tituloContent">Titulo Content</ui:insert></title>
     </h:head>
 
     <h:body>
@@ -20,14 +20,15 @@
                 <ui:insert name="nav">Nav</ui:insert>
             </div>
         </div>
-            
+
         <div id="content" class="left_content">
-            <div class="tituloContent"/>
+            <div class="tituloContent">
                 <ui:insert name="tituloContent">Titulo Content</ui:insert>
+            </div>
             <div class="contenido">
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </div>
-            
+
     </h:body>
 </html>

@@ -36,14 +36,14 @@ public class TipoDocumento implements Serializable {
     @Column(name = "formato_codigo")
     private String formatoCodigo;
     @Column(name = "impacto_inventario")
-    private Short impactoInventario;
+    private Integer impactoInventario;
     @NotNull
     private Integer estado;
 
     public TipoDocumento() {
     }
 
-    public TipoDocumento(String nombre, String descripcion, Long indice, String formatoCodigo, Short impactoInventario, Integer estado) {
+    public TipoDocumento(String nombre, String descripcion, Long indice, String formatoCodigo, Integer impactoInventario, Integer estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.indice = indice;
@@ -93,11 +93,11 @@ public class TipoDocumento implements Serializable {
         this.formatoCodigo = formatoCodigo;
     }
 
-    public Short getImpactoInventario() {
+    public Integer getImpactoInventario() {
         return impactoInventario;
     }
 
-    public void setImpactoInventario(Short impactoInventario) {
+    public void setImpactoInventario(Integer impactoInventario) {
         this.impactoInventario = impactoInventario;
     }
 

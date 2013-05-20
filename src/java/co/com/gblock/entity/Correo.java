@@ -5,12 +5,16 @@
 package co.com.gblock.entity;
 
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.component.UIInput;
+import javax.faces.event.ValueChangeEvent;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,8 +23,10 @@ import javax.validation.constraints.Size;
  *
  * @author jhonny
  */
+@ManagedBean
 @Entity
 @Table(name = "correos")
+@NamedQuery(name = "Correo.consultarPorTercero", query = "SELECT o FROM Correo o WHERE o.tercero = :tercero")
 public class Correo implements Serializable {
 
     @Id
@@ -36,7 +42,7 @@ public class Correo implements Serializable {
     private Tercero tercero;
     @NotNull
     private Integer estado;
-    
+
     public Correo() {
     }
 
@@ -54,8 +60,8 @@ public class Correo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }    
-    
+    }
+
     public String getEmail() {
         return email;
     }
@@ -89,7 +95,6 @@ public class Correo implements Serializable {
     }
 
     //</editor-fold>
-
     //<editor-fold defaultstate="collapsed" desc="Metodos Sobreescritos">
     @Override
     public int hashCode() {
@@ -111,7 +116,7 @@ public class Correo implements Serializable {
             return false;
         }
         final Correo other = (Correo) obj;
-         if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
+        if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
             return false;
         }
         if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
@@ -131,7 +136,13 @@ public class Correo implements Serializable {
 
     @Override
     public String toString() {
-        return "Correo{" + "id=" + id + "email=" + email + ", tipo=" + tipo + ", estado=" + estado + ", tercero=" + tercero + '}';
+        return email;
     }
     //</editor-fold>
+
+    //Metodo seteo managedbean (al utilizar el immediate="true")
+    public void setEmail(ValueChangeEvent ev) {
+        setEmail((String) ev.getNewValue());
+        ((UIInput) ev.getComponent()).setLocalValueSet(false);
+    }
 }

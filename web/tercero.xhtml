@@ -9,93 +9,81 @@
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-        
-        <h:form>
-            <header class="buAction">
-                <p:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
-                    <p:menuitem value="Configurar Cuenta"/>
-                    <p:menuitem value="LogOut" action="#{loginEBean.regresar()}" ajax="false"/>
-                </p:menuButton>
-            </header>
-        </h:form>
-        
-        <h:form id="fter">
-            <div id="regter" class="registros">
-                <h:panelGrid columns="2">
-                    <f:facet name="header">
-                        Tercero
-                    </f:facet>
-                    <h:outputText value="Tipo de Tercero"/>
-                    <h:selectOneMenu value="#{terceroEBean.tercero.tipo.id}" required="true">
-                        <f:selectItem itemLabel="|Seleccione|" noSelectionOption="true"/>
-                        <f:selectItems value="#{terceroEBean.listaTipoTerceros}" var="tipter"
-                                       itemLabel="#{tipter.nombre}" itemValue="#{tipter.id}"/>
-                    </h:selectOneMenu>
-                    <h:outputText value="Numero de Identificacion"/>
-                    <p:inputText value="#{terceroEBean.tercero.numeroId}" required="true"/>
-                    
-                    <h:outputText value="Tipo de Identificacion"/>
-                    <p:inputText value="#{terceroEBean.tercero.tipoId}" required="true"/>
-                    
-                    <h:outputText value="Digito de Verificacion"/>
-                    <p:inputText value="#{terceroEBean.tercero.digitoVerificacion}"/>
-                    
-                    <h:outputText value="Nombres"/>
-                    <p:inputText value="#{terceroEBean.tercero.nombres}" required="true"/>
-                    
-                    <h:outputText value="Apellidos"/>
-                    <p:inputText value="#{terceroEBean.tercero.apellidos}" required="true"/>
-                    
-                    <h:outputText value="Direccion"/>
-                    <p:inputText value="#{terceroEBean.tercero.direccion}" required="true"/>
-                    
-                    <p:dataTable id="tabtel" value="#{terceroEBean.listaTelefonos}" var="telefono" editable="true" rows="5">
-                    <f:facet name="header">
-                        <p:inputText id="tex" value="#{terceroEBean.telefono.numero}"/>
-                        <p:commandButton value="+" actionListener="#{terceroEBean.addTelefono()}" update="tabtel"
-                                         style="font-size: 0.8em;" title="Agregar" immediate="true"/>
-                    </f:facet>
-                
-                <p:column headerText="Telefonos">
-                    <p:inputText id="t" value="#{telefono}"/>
-                    <p:commandButton value="/" actionListener="#{terceroEBean.editarTelefono(tel)}" 
-                                     update="tabtel" style="font-size: 0.4em;" title="Editar" immediate="true"/>
-                    <p:commandButton value="-" actionListener="#{terceroEBean.eliminarTelefono(tel)}" 
-                                     update="tabtel" style="font-size: 0.4em;" title="Eliminar" immediate="true"/>
-                </p:column>
-                    
-                </p:dataTable>
-                
-                    <p:dataTable id="tabcorr" value="#{terceroEBean.listaCorreos}" var="correo" editable="true" rows="5">
-                    <f:facet name="header">
-                        <p:inputText id="cor" value="#{terceroEBean.correo.email}"/>
-                        <p:commandButton value="+" actionListener="#{terceroEBean.addCorreo()}" update="tabcorr"
-                                         style="font-size: 0.8em;" title="Agregar" immediate="true"/>
-                    </f:facet>
-                    <p:column headerText="Correos">
-                        <p:inputText id="t" value="#{correo.email}"/>
-                        <p:commandButton value="/" actionListener="#{terceroEBean.editarCorreo(correo)}" 
-                                         update="tabcorr" style="font-size: 0.4em;" title="Editar" immediate="true"/>
-                        <p:commandButton value="-" actionListener="#{terceroEBean.eliminarCorreo(correo)}" 
-                                         update="tabcorr" style="font-size: 0.4em;" title="Eliminar" immediate="true"/>
-                    </p:column>
-                
-                </p:dataTable>
+        <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" template="./WEB-INF/plantilla.xhtml">
 
-                </h:panelGrid>
-            </div>
-                
-                <div id="menuAcc" class="menuaccion">
-                    <p:menu styleClass="menuaccion">
-                        <p:menuitem value="Nuevo" action="tercero" ajax="false" immediate="true"/>
-                        <p:menuitem value="Guardar" action="#{terceroEBean.guardar()}" ajax="false"/>
-                        <p:menuitem value="Consultar" action="consultaTercero" ajax="false" immediate="true"/>
-                        <p:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
-                    </p:menu>
-                </div>
-                
-        </h:form>
+            <ui:define name="nav">
+                <h:form>
+                    <header class="buAction">
+                        <p:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
+                            <p:menuitem value="Configurar Cuenta"/>
+                            <p:menuitem value="LogOut" action="#{loginEBean.regresar()}" ajax="false"/>
+                        </p:menuButton>
+                    </header>
+                    <div id="menuAcc" class="menuaccion">
+                        <p:menu styleClass="menuaccion">
+                            <p:menuitem value="Nuevo" action="tercero" ajax="false" immediate="true"/>
+                            <p:menuitem value="Guardar" action="#{terceroEBean.guardar()}" ajax="false"/>
+                            <p:menuitem value="Consultar" action="consultaTercero" ajax="false" immediate="true"/>
+                            <p:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
+                        </p:menu>
+                    </div>
+                </h:form>                
+            </ui:define>
 
+            <ui:define name="tituloContent">Tercero</ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <div id="regter" class="registros">
+                        <h:panelGrid columns="2" >
+                            <h:outputText value="Tipo de Tercero"/>
+                            <h:selectOneMenu value="#{terceroEBean.tercero.tipo.id}" required="true">
+                                <f:selectItem itemLabel="|Seleccione un tipo|" noSelectionOption="true"/>
+                                <f:selectItems value="#{terceroEBean.listaTipoTerceros}" var="tipter" itemLabel="#{tipter.nombre}" itemValue="#{tipter.id}"/>
+                            </h:selectOneMenu>
+                            <h:outputText value="Numero de Identificacion"/>
+                            <p:inputText value="#{terceroEBean.tercero.numeroId}" required="true"/>
+
+                            <h:outputText value="Tipo de Identificacion"/>
+                            <p:inputText value="#{terceroEBean.tercero.tipoId}" required="true"/>
+
+                            <h:outputText value="Digito de Verificacion"/>
+                            <p:inputText value="#{terceroEBean.tercero.digitoVerificacion}"/>
+
+                            <h:outputText value="Nombres"/>
+                            <p:inputText value="#{terceroEBean.tercero.nombres}" required="true"/>
+
+                            <h:outputText value="Apellidos"/>
+                            <p:inputText value="#{terceroEBean.tercero.apellidos}" required="true"/>
+
+                            <h:outputText value="Direccion"/>
+                            <p:inputText value="#{terceroEBean.tercero.direccion}" required="true"/>
+
+                            <p:dataTable id="tabtel" value="#{terceroEBean.listaTelefonos}" var="tel" editable="true">
+                                <f:facet name="header">
+                                    <p:inputText value="#{telefono.numero}" immediate="true" valueChangeListener="#{telefono.setNumero}" />
+                                    <p:commandButton value="+" actionListener="#{terceroEBean.addTelefono(telefono)}" update="tabtel" title="Agregar" immediate="true" style="font-size: 0.8em;" />
+                                </f:facet>
+                                <p:column headerText="Telefonos">
+                                    <p:inputText value="#{tel.numero}" immediate="true" valueChangeListener="#{tel.setNumero}" disabled="true"/>
+                                    <p:commandButton value="-" action="#{terceroEBean.eliminarTelefono(tel)}" update="tabtel" immediate="true" style="font-size: 0.8em;" />
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:dataTable id="tabcorr" value="#{terceroEBean.listaCorreos}" var="cor" editable="true" rows="5">
+                                <f:facet name="header">
+                                    <p:inputText value="#{correo.email}" immediate="true" valueChangeListener="#{correo.setEmail}" />
+                                    <p:commandButton value="+" actionListener="#{terceroEBean.addCorreo(correo)}" update="tabcorr" title="Agregar" immediate="true" style="font-size: 0.8em;"/>
+                                </f:facet>
+                                <p:column headerText="Correos">
+                                    <p:inputText id="t" value="#{cor.email}" immediate="true" valueChangeListener="#{cor.setEmail}"  disabled="true"/>
+                                    <p:commandButton value="-" actionListener="#{terceroEBean.eliminarCorreo(cor)}" update="tabcorr" title="Eliminar" immediate="true" style="font-size: 0.8em;" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

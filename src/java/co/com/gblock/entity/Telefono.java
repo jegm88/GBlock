@@ -5,12 +5,16 @@
 package co.com.gblock.entity;
 
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.component.UIInput;
+import javax.faces.event.ValueChangeEvent;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,8 +23,10 @@ import javax.validation.constraints.Size;
  *
  * @author jhonny
  */
+@ManagedBean
 @Entity
 @Table(name = "telefonos")
+@NamedQuery(name = "Telefono.consultarPorTercero", query = "SELECT o FROM Telefono o WHERE o.tercero = :tercero")
 public class Telefono implements Serializable {
 
     @Id
@@ -54,8 +60,8 @@ public class Telefono implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }    
-    
+    }
+
     public String getNumero() {
         return numero;
     }
@@ -130,7 +136,13 @@ public class Telefono implements Serializable {
 
     @Override
     public String toString() {
-        return "Telefono{" + "id=" + id +"numero=" + numero + ", tipo=" + tipo + ", estado=" + estado + ", tercero=" + tercero + '}';
+        return numero;
     }
     //</editor-fold>
+
+    //Metodo seteo managedbean (al utilizar el immediate="true")
+    public void setNumero(ValueChangeEvent ev) {
+        setNumero((String) ev.getNewValue());
+        ((UIInput) ev.getComponent()).setLocalValueSet(false);
+    }
 }
