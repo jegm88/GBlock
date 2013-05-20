@@ -1,7 +1,7 @@
 
 
 body {
-    background-color: #e1ddd9;
+    background-color: #efefef;
     font-size: 12px;
     font-family: Verdana, Arial, SunSans-Regular, Sans-Serif;
     color:#564b47;
@@ -15,12 +15,16 @@ body {
     height: 100%;
     padding:0px;
     margin:0px;
-    background: #6BB130;
+    background:url(../img/bg.png) repeat;
+
+    -webkit-box-shadow: 2px 0px 4px #777;
+    -moz-box-shadow: 2px 0px 4px #777;
+    box-shadow: 2px 0px 4px #777;
 }
 
 #content {
+    padding: 10px;
     margin-left: 200px;
-    background-color:#fff;
     height: auto;
     position: absolute;
 }

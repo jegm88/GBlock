@@ -8,17 +8,53 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../css/layout.css" rel="stylesheet" type="text/css" />
         <link href="./../css/principal.css" rel="stylesheet" type="text/css" />
+        <link href="./../css/accordeonmenu.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="./../js/jquery.min.js"></script>
+        <script type="text/javascript" src="./../js/accordeon.js"></script>
+        
         <title><ui:insert name="tituloContent">Titulo Content</ui:insert></title>
     </h:head>
 
     <h:body>
         <div id="navBar">
+
             <div id="tituloNavBar">
                 <div id="logo"/>
             </div>
-            <div id="nav">
-                <ui:insert name="nav">Nav</ui:insert>
-            </div>
+
+            <h:form>
+                <div id="nav">
+                    <ui:insert name="nav">Nav</ui:insert>
+
+                    <ul class="accordion">
+                        <li id="one" class="tareas"><a href="#one">Tareas</a>
+                            <ul class="sub-menu">
+                                <li class="compra"><h:commandLink action="compra">Compra</h:commandLink></li>
+                                <li class="venta"><h:commandLink action="venta">Venta</h:commandLink></li>
+                                <li class="reporte"><h:commandLink action="reporte">Reporte</h:commandLink></li>
+                                <li class="configuracion"><h:commandLink action="configuracion">Configuracion</h:commandLink></li>
+                            </ul>
+                        </li>
+                        <li id="two" class="opciones"><a href="#two">Opciones</a>
+                            <ul class="sub-menu">
+                                <li class="nuevo"><h:commandLink action="#">Nuevo</h:commandLink></li>
+                                <li class="guardar"><h:commandLink action="#">Guardar</h:commandLink></li>
+                                <li class="modificar"><h:commandLink action="#">Modificar</h:commandLink></li>
+                                <li class="eliminar"><h:commandLink action="#">Eliminar</h:commandLink></li>
+                                <li class="error"><h:commandLink action="#">Reportar error</h:commandLink></li>
+                                <li class="consultar"><h:commandLink action="#">Consultar</h:commandLink></li>
+                                <li class="imprimir"><h:commandLink action="#">Imprimir</h:commandLink></li>
+                            </ul>
+                        </li>
+                        <li id="three" class="usuarios"><a href="#three">Usuario: #{loginEBean.usuario.nick}</a>
+                            <ul class="sub-menu">
+                                <li class="configuracion"><h:commandLink action="#">Configurar Cuenta</h:commandLink></li>
+                                <li class="logout"><h:commandLink action="#{loginEBean.logout()}">Cerrar Sesion</h:commandLink></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </h:form>
         </div>
 
         <div id="content" class="left_content">
@@ -29,6 +65,5 @@
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </div>
-
     </h:body>
 </html>
