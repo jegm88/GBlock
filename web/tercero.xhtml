@@ -4,32 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Tercero</title>
-        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
-    </h:head>
     <h:body>
         <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" template="./WEB-INF/plantilla.xhtml">
-
-            <ui:define name="nav">
-                <h:form>
-                    <header class="buAction">
-                        <p:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
-                            <p:menuitem value="Configurar Cuenta"/>
-                            <p:menuitem value="LogOut" action="#{loginEBean.regresar()}" ajax="false"/>
-                        </p:menuButton>
-                    </header>
-                    <div id="menuAcc" class="menuaccion">
-                        <p:menu styleClass="menuaccion">
-                            <p:menuitem value="Nuevo" action="tercero" ajax="false" immediate="true"/>
-                            <p:menuitem value="Guardar" action="#{terceroEBean.guardar()}" ajax="false"/>
-                            <p:menuitem value="Consultar" action="consultaTercero" ajax="false" immediate="true"/>
-                            <p:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
-                        </p:menu>
-                    </div>
-                </h:form>                
-            </ui:define>
-
             <ui:define name="tituloContent">Tercero</ui:define>
             <ui:define name="content">
                 <h:form>
