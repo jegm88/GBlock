@@ -19,12 +19,14 @@
                 </p:menuButton>
             </header>
         </h:form>
+
         <h:form id="fbodega">
             <div id="regbod" class="registros">
                 <h:panelGrid columns="2">
                     <f:facet name="header">Bodega</f:facet>
                     <h:outputText value="Nombre"/>
-                    <p:inputText id="nombre" value="#{bodegaEBean.bodega.nombre}"/>
+                    <p:inputText id="nombre" value="#{bodegaEBean.bodega.nombre}" required="true" 
+                                 requiredMessage="El campo nombre no puede ir vacio"/>
                     <h:outputText value="Ubicacion"/>
                     <p:inputText id="ubicacion" value="#{bodegaEBean.bodega.ubicacion}"/>
                     <h:outputText value="Descripcion"/>
@@ -34,12 +36,40 @@
             <div id="menuAcc" class="menuaccion">
                 <p:menu styleClass="menuaccion">
                     <p:menuitem value="Nuevo" action="bodega" ajax="false"/>
-                    <p:menuitem value="Guardar" action="#{bodegaEBean.guardar()}" ajax="false" />
-                    <p:menuitem value="Modificar" action="#{bodegaEBean.guardar()}" ajax="false"/>
-                    <p:menuitem value="Consultar" action="consultaBodega" ajax="false" immediate="true" icon="img/magnifier.png"/>
+                    <p:menuitem value="Guardar" action="#{bodegaEBean.guardar()}" update=":flistabodega"/>
+                    <p:menuitem value="Modificar" action="#{bodegaEBean.guardar()}" update=":flistabodega"/>
+                    <p:menuitem value="Consultar" update=":flistabodega" onclick="bodegaConsultar.show();" 
+                                immediate="true" oncomplete="bodegaConsultar.show();"/>
                     <p:menuitem value="Regresar" action="principal" ajax="false" immediate="true"/>
                 </p:menu>
             </div>
+            <p:growl id="messages" autoUpdate="true"/>
+        </h:form>
+        <h:form id="flistabodega">
+            <p:dialog widgetVar="bodegaConsultar" modal="true" position="center">
+                <p:panel header="Lista de Bodegas" style="margin: 5em; padding: 2em;">
+                <p:dataTable value="#{bodegaEBean.listaBodegas}" var="bodega" rows="5">
+                    <p:column headerText="Nombre" >
+                        #{bodega.nombre}
+                    </p:column>
+                    <p:column headerText="Ubicacion">
+                        #{bodega.ubicacion}
+                    </p:column>
+                    <p:column headerText="Descripcion">
+                        #{bodega.descripcion}
+                    </p:column>
+                    <p:column headerText="Accion" style="text-align: center;">
+                        <p:commandButton value="Visualizar" immediate="true" action="bodega" 
+                                         actionListener="#{bodegaEBean.seleccionar(bodega)}" update=":fbodega"
+                                         onsuccess="bodegaConsultar.hide()"
+                                         />
+                        <p:commandButton value="Eliminar" actionListener="#{bodegaEBean.eliminar(bodega)}"
+                                         update=":flistabodega"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+                
+            </p:dialog>
         </h:form>
     </h:body>
 </html>

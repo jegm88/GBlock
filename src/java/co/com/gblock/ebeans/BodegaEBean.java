@@ -6,6 +6,7 @@ package co.com.gblock.ebeans;
 
 import co.com.gblock.entity.Bodega;
 import co.com.gblock.services.interfaceServicios.IBodegaServicio;
+import co.com.gblock.services.utilidad.Mensajes;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,7 +15,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 /**
  *
@@ -53,10 +53,12 @@ public class BodegaEBean implements Serializable{
                 LOGGER.log(Level.INFO, "Guardando bodega ({0})", this.getClass().getSimpleName());
                 bodega.setEstado(1);
                 bodegaServicio.insertar(bodega);
+                Mensajes.agregarInfoMensaje("Bodega "+bodega.getNombre()+" Guardada",null);
             }else{
                 
                 LOGGER.log(Level.INFO, "Modificando datos de la bodega ({0})", this.getClass().getSimpleName());
                 bodegaServicio.modificar(bodega);
+                Mensajes.agregarInfoMensaje("Bodega "+bodega.getNombre()+ "Modificada", null);
             }
             
             listar();
@@ -65,6 +67,7 @@ public class BodegaEBean implements Serializable{
         } catch (Exception e) {
             
             LOGGER.log(Level.SEVERE, "Error al registrar bodega ({0})", this.getClass().getSimpleName());
+            Mensajes.agregarErrorMensaje("Error al guardar o modificar bodega "+bodega.getNombre(), null);
         }
     }
     
@@ -73,12 +76,14 @@ public class BodegaEBean implements Serializable{
         LOGGER.log(Level.INFO, "Actualizando...");
         
         listaBodegas = bodegaServicio.listarTodo(Bodega.class);
+        Mensajes.agregarInfoMensaje("Lista de Bodegas actualizada", null);
     }
     
     public void seleccionar(Bodega bodega){
         
         LOGGER.log(Level.INFO, "Seleccionando bodega ({0})", this.getClass().getSimpleName());
         this.bodega = bodega;
+        Mensajes.agregarInfoMensaje("Cargando datos de bodega "+bodega.getNombre(), null);
     }
     
     public void eliminar(Bodega bodega){
@@ -88,11 +93,13 @@ public class BodegaEBean implements Serializable{
         try {
             
             bodegaServicio.eliminar(bodega.getId(), Bodega.class);
+            Mensajes.agregarInfoMensaje("Bodega con nombre "+bodega.getNombre()+" Eliminada", null);
             
             listar();
         } catch (Exception e) {
             
             LOGGER.log(Level.SEVERE, "Error al eliminar bodega ({0})", this.getClass().getSimpleName());
+            Mensajes.agregarErrorMensaje("Error al eleiminar bodega "+bodega.getNombre(), null);
         }
     }
 
