@@ -12,10 +12,10 @@
                     <div id="regter" class="registros">
                         <h:panelGrid columns="2" >
                             <h:outputText value="Tipo de Tercero"/>
-                            <h:selectOneMenu value="#{terceroEBean.tercero.tipo.id}" required="true">
+                            <p:selectOneMenu value="#{terceroEBean.tercero.tipo}" required="true">
                                 <f:selectItem itemLabel="|Seleccione un tipo|" noSelectionOption="true"/>
-                                <f:selectItems value="#{terceroEBean.listaTipoTerceros}" var="tipter" itemLabel="#{tipter.nombre}" itemValue="#{tipter.id}"/>
-                            </h:selectOneMenu>
+                                <f:selectItems value="#{terceroEBean.listaTipoTerceros}" var="tipter" itemLabel="#{tipter.nombre}" itemValue="#{tipter}"/>
+                            </p:selectOneMenu>
                             <h:outputText value="Numero de Identificacion"/>
                             <p:inputText value="#{terceroEBean.tercero.numeroId}" required="true"/>
 

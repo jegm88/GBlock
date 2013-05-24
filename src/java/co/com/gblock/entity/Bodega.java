@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,6 +21,10 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "bodegas")
+@NamedQueries({
+    @NamedQuery(name = "Bodega.buscarPorNombre", query = "SELECT o FROM Bodega o WHERE o.nombre = :nombre AND o.estado <> 0"),
+    @NamedQuery(name = "Bodega.listarHabilitados", query = "SELECT o FROM Bodega o WHERE o.estado <> 0")
+})
 public class Bodega implements Serializable {
 
     @Id
@@ -84,7 +90,6 @@ public class Bodega implements Serializable {
     }
 
     //</editor-fold>
-
     //<editor-fold defaultstate="collapsed" desc="Metodos Sobreescritos">
     @Override
     public int hashCode() {

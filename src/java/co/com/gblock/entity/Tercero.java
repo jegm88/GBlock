@@ -29,8 +29,9 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "terceros")
 @NamedQueries({
-@NamedQuery(name = "Tercero.buscarPorNumeroId",query = "SELECT o FROM Tercero o WHERE o.numeroId = :numeroId"),
-@NamedQuery(name = "Tercero.listarPorTipo",query = "SELECT o FROM Tercero o WHERE o.tipo = :tipo")
+    @NamedQuery(name = "Tercero.buscarPorNumeroId", query = "SELECT o FROM Tercero o WHERE o.numeroId = :numeroId AND o.estado <> 0"),
+    @NamedQuery(name = "Tercero.listarPorTipo", query = "SELECT o FROM Tercero o WHERE o.tipo = :tipo AND o.estado <> 0"),
+    @NamedQuery(name = "Tercero.listarHabilitados", query = "SELECT o FROM Tercero o WHERE o.estado <> 0")
 })
 public class Tercero implements Serializable {
 
@@ -38,7 +39,7 @@ public class Tercero implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Column(unique=true)
+    @Column(unique = true)
     @Size(min = 1, max = 50)
     private String numeroId;
     @Size(max = 50)
@@ -72,7 +73,7 @@ public class Tercero implements Serializable {
         this.tipo = tipo;
         this.estado = estado;
     }
-    
+
     public Tercero(String numeroId, String tipoId, Integer digitoVerificacion, String nombres, String apellidos, String direccion, List<Telefono> telefonos, TipoTercero tipo, List<Correo> correos, Integer estado) {
         this.numeroId = numeroId;
         this.tipoId = tipoId;
@@ -93,7 +94,7 @@ public class Tercero implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }    
+    }
 
     public String getNumeroId() {
         return numeroId;
@@ -101,7 +102,7 @@ public class Tercero implements Serializable {
 
     public void setNumeroId(String numeroId) {
         this.numeroId = numeroId;
-    }   
+    }
 
     public String getTipoId() {
         return tipoId;
@@ -201,7 +202,7 @@ public class Tercero implements Serializable {
             return false;
         }
         final Tercero other = (Tercero) obj;
-         if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
+        if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
             return false;
         }
         if ((this.numeroId == null) ? (other.numeroId != null) : !this.numeroId.equals(other.numeroId)) {
@@ -233,7 +234,7 @@ public class Tercero implements Serializable {
 
     @Override
     public String toString() {
-        return "Tercero{" + "id=" + id+ "numeroId=" + numeroId + ", tipoId=" + tipoId + ", digitoVerificacion=" + digitoVerificacion + ", nombres=" + nombres + ", apellidos=" + apellidos + ", direccion=" + direccion + ", estado=" + estado + ", tipo=" + tipo + '}';
+        return "Tercero{" + "id=" + id + "numeroId=" + numeroId + ", tipoId=" + tipoId + ", digitoVerificacion=" + digitoVerificacion + ", nombres=" + nombres + ", apellidos=" + apellidos + ", direccion=" + direccion + ", estado=" + estado + ", tipo=" + tipo + '}';
     }
     //</editor-fold>
 }

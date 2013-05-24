@@ -34,12 +34,23 @@ public class TerceroServicio extends GenericaServicio<Tercero, Long> implements 
             return null;
         }
     }
-    
+
     @Override
     public List<Tercero> listarPorTipo(TipoTercero tipo) {
         LOGGER.log(Level.INFO, "Ejecutando metodo listar por tipo ({0})", this.getClass().getSimpleName());
         TypedQuery<Tercero> query = entityManager.createNamedQuery("Tercero.listarPorTipo", Tercero.class);
         query.setParameter("tipo", tipo);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Tercero> listarHabilitados() {
+        LOGGER.log(Level.INFO, "Ejecutando metodo listar habilitados ({0})", this.getClass().getSimpleName());
+        TypedQuery<Tercero> query = entityManager.createNamedQuery("Tercero.listarHabilitados", Tercero.class);
         try {
             return query.getResultList();
         } catch (NoResultException e) {

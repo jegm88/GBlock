@@ -2,69 +2,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../css/layout.css" rel="stylesheet" type="text/css" />
         <link href="./../css/accordeonmenu.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="./../js/jquery.min.js"></script>
         <script type="text/javascript" src="./../js/accordeon.js"></script>
 
         <title><ui:insert name="tituloContent">Titulo Content</ui:insert></title>
     </h:head>
 
     <h:body>
-        <div id="navBar">
-            <h:form>
+        <h:form id="frmtodo">    
+            <ui:insert name="dialogos"></ui:insert>
 
-                <div id="tituloNavBar">
-                    <div class="logo">
-                        <h:commandLink action="principal">GBlock V2</h:commandLink>
+            <div id="navBar">
+                    <div id="tituloNavBar">
+                        <div class="logo">
+                            <h:commandLink action="principal" immediate="true">GBlock V2</h:commandLink>
+                        </div>
                     </div>
-                </div>
 
-                <div id="nav">
-                    <ui:insert name="nav"></ui:insert>
-
-                    <ul class="accordion">
-                        <li id="one" class="tareas"><a href="#one">Tareas</a>
-                            <ul class="sub-menu">
-                                <li class="compra"><h:commandLink action="compra">Compra</h:commandLink></li>
-                                <li class="venta"><h:commandLink action="venta">Venta</h:commandLink></li>
-                                <li class="reporte"><h:commandLink action="reporte">Reporte</h:commandLink></li>
-                                <li class="configuracion"><h:commandLink action="configuracion">Configuracion</h:commandLink></li>
-                            </ul>
-                        </li>
-                        <li id="two" class="opciones"><a href="#two">Opciones</a>
-                            <ul class="sub-menu">
-                                <li class="nuevo"><h:commandLink action="#">Nuevo</h:commandLink></li>
-                                <li class="guardar"><h:commandLink action="#">Guardar</h:commandLink></li>
-                                <li class="modificar"><h:commandLink action="#">Modificar</h:commandLink></li>
-                                <li class="eliminar"><h:commandLink action="#">Eliminar</h:commandLink></li>
-                                <li class="error"><h:commandLink action="#">Reportar error</h:commandLink></li>
-                                <li class="consultar"><h:commandLink action="#">Consultar</h:commandLink></li>
-                                <li class="imprimir"><h:commandLink action="#">Imprimir</h:commandLink></li>
-                            </ul>
-                        </li>
-                        <li id="three" class="usuarios"><a href="#three">Usuario: #{loginEBean.usuario.nick}</a>
-                            <ul class="sub-menu">
-                                <li class="configuracion"><h:commandLink action="#">Configurar Cuenta</h:commandLink></li>
-                                <li class="logout"><h:commandLink action="#{loginEBean.logout()}">Cerrar Sesion</h:commandLink></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </h:form>
-        </div>
-
-        <div id="cont" class="left_content">
-            <div class="tituloContent">
-                <ui:insert name="tituloContent">Titulo Content</ui:insert>
+                    <div id="nav">
+                        <ui:insert name="nav"></ui:insert>
+                        <ul class="accordion">
+                            <ui:insert name="accItem1">
+                                <li id="one" class="tareas"><a href="#one">Tareas</a>
+                                    <ul class="sub-menu">
+                                        <li class="compra"><h:commandLink action="compra" immediate="true">Compra</h:commandLink></li>
+                                        <li class="venta"><h:commandLink action="venta" immediate="true">Venta</h:commandLink></li>
+                                        <li class="reporte"><h:commandLink action="reporte" immediate="true">Reporte</h:commandLink></li>
+                                        <li class="configuracion"><h:commandLink action="configuracion" immediate="true">Configuracion</h:commandLink></li>
+                                    </ul>
+                                </li>
+                            </ui:insert>
+                            <ui:insert name="accItem2">
+                                <!--
+                                               <li id="two" class="opciones"><a href="#two">Opciones</a>
+                                                   <ul class="sub-menu">
+                                                       <li class="nuevo"><ui:insert name="opNuevo"></ui:insert></li>
+                                                       <li class="guardar"><ui:insert name="opGuardar"></ui:insert></li>
+                                                       <li class="modificar"><ui:insert name="opModificar"></ui:insert></li>
+                                                       <li class="eliminar"><ui:insert name="opEliminar"></ui:insert></li>
+                                                       <li class="error"><ui:insert name="opReportar"></ui:insert></li>
+                                                       <li class="consultar"><ui:insert name="opConsultar"></ui:insert></li>
+                                                       <li class="imprimir"><ui:insert name="opImprimir"></ui:insert></li>
+                                                   </ul>
+                                               </li>
+                                -->
+                            </ui:insert>
+                            <ui:insert name="accItem3">
+                                <li id="three" class="usuarios"><a href="#three">Usuario: #{loginEBean.usuario.nick}</a>
+                                    <ul class="sub-menu">
+                                        <li class="configuracion"><h:commandLink immediate="true">Configurar Cuenta</h:commandLink></li>
+                                        <li class="logout"><h:commandLink action="#{loginEBean.logout()}" immediate="true">Cerrar Sesion</h:commandLink></li>
+                                    </ul>
+                                </li>
+                            </ui:insert>
+                        </ul>
+                    </div>
             </div>
-            <div class="contenido">
-                <ui:insert name="content">Content</ui:insert>
+
+            <div id="cont" class="left_content">
+                <p:growl id="messages" autoUpdate="true"/>
+                <div class="tituloContent">
+                    <ui:insert name="tituloContent"></ui:insert>
+                </div>
+                <div class="contenido">
+                    <ui:insert name="content"></ui:insert>
+                </div>
             </div>
-        </div>
+        </h:form>
     </h:body>
 </html>
