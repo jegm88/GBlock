@@ -44,13 +44,12 @@
     <ui:define name="accItem2">
         <li id="two" class="opciones"><a href="#two">Opciones</a>
             <ul class="sub-menu">
-                <li class="nuevo"><p:commandLink action="#{bodegaEBean.nuevo()}"  update=":frmtodo" immediate="true">Nuevo</p:commandLink></li>
-                <li class="guardar"><p:commandLink action="#{bodegaEBean.guardar()}" update=":frmtodo">Guardar</p:commandLink></li>
-                <li class="modificar"><p:commandLink action="#{bodegaEBean.guardar()}" update=":frmtodo">Modificar</p:commandLink></li>
-                <li class="eliminar"><p:commandLink action="#{bodegaEBean.eliminar()}" update=":frmtodo">Eliminar</p:commandLink></li>
-                <li class="consultar"><p:commandLink onclick="bodegaConsultar.show();
-                    return false;" immediate="true" update=":frmtodo">Consultar</p:commandLink></li>
-                <li class="imprimir"><ui:insert name="opImprimir"></ui:insert></li>
+                <li class="nuevo"><p:commandLink action="#{bodegaEBean.nuevo()}"  update=":frmtodo" rendered="#{loginEBean.puede('CB')}">Nuevo</p:commandLink></li>
+                <li class="guardar"><p:commandLink action="#{bodegaEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('CB') and bodegaEBean.bodega.id == null}">Guardar</p:commandLink></li>
+                <li class="modificar"><p:commandLink action="#{bodegaEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('MB') and bodegaEBean.bodega.id !=null}">Modificar</p:commandLink></li>
+                <li class="eliminar"><p:commandLink action="#{bodegaEBean.eliminar()}" update=":frmtodo" rendered="#{loginEBean.puede('EB') and bodegaEBean.bodega.id !=null}">Eliminar</p:commandLink></li>
+                <li class="consultar"><p:commandLink onclick="bodegaConsultar.show();return true;" immediate="true" update=":frmtodo">Consultar</p:commandLink></li>
+                <li class="imprimir"><p:commandLink update=":frmtodo" rendered="#{false}">Imprimir</p:commandLink></li>
             </ul>
         </li>
     </ui:define>

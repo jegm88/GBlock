@@ -6,6 +6,7 @@ package co.com.gblock.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,8 +36,8 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "tercero", referencedColumnName = "id")
     @OneToOne
     private Tercero tercero;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "perfil", referencedColumnName = "id")
-    @ManyToOne
     private Perfil perfil;
     
     private Integer estado;

@@ -55,12 +55,13 @@ body {
 .logo:hover > a:before,
 .logo:target > a:before,
 .logo > a.active:before {
-    background-image: url(../img/logomini1.png);
+    /*background-image: url(../img/logomini1.png);*/
+    background-image: url(../img/logomini2.png);
 }
 
 .logo>a:hover{
-    color:#a5cd4e;
-
+    /*color:#a5cd4e;*/    
+    color:#ffe900;
 }
 
 .tituloContent, .logo > a {

@@ -31,6 +31,7 @@ public class BodegaEBean implements Serializable {
     private List<Bodega> listaBodegas;
 
     public BodegaEBean() {
+        LOGGER.log(Level.INFO, "Ejecutando constructor ({0})", this.getClass().getSimpleName());
         bodega = new Bodega();
     }
 
@@ -50,7 +51,8 @@ public class BodegaEBean implements Serializable {
         LOGGER.log(Level.INFO, "Registrando bodega ({0})", this.getClass().getSimpleName());
         try {
             if (bodega.getId() == null) {
-                if (bodegaServicio.consultarPorNombre(bodega.getNombre()) != null) {
+                Bodega tmp = bodegaServicio.consultarPorNombre(bodega.getNombre());
+                if (tmp != null) {
                     throw new Exception("Ya existe una bodega con el nombre: " + bodega.getNombre());
                 } else {
                     LOGGER.log(Level.INFO, "Guardando bodega ({0})", bodega.getNombre());
@@ -60,7 +62,7 @@ public class BodegaEBean implements Serializable {
                 }
             } else {
                 Bodega tmp = bodegaServicio.consultarPorNombre(bodega.getNombre());
-                if (tmp != null && !bodega.getId().equals(tmp.getId())) {
+                if (tmp != null && (!bodega.getId().equals(tmp.getId())&& tmp.getEstado()!=0)) {
                     throw new Exception("Ya existe una bodega con el nombre: " + bodega.getNombre());
                 } else {
                     LOGGER.log(Level.INFO, "Modificando datos de la bodega ({0})", bodega.getNombre());
@@ -94,9 +96,12 @@ public class BodegaEBean implements Serializable {
     public void eliminar(Bodega bodega) {
         LOGGER.log(Level.INFO, "Eliminando bodega ({0})", bodega.getNombre());
         try {
-            bodegaServicio.eliminar(bodega.getId(), Bodega.class);
+            //bodegaServicio.eliminar(bodega.getId(), Bodega.class);
+            bodega.setEstado(0);
+            bodegaServicio.modificar(bodega);
             Mensajes.agregarInfoMensaje("Bodega " + bodega.getNombre() + " eliminada exitosamente!", null);
             listar();
+            nuevo();
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "¡Error al eliminar bodega: ({0})!", e.getMessage());
             Mensajes.agregarErrorMensaje("¡Error: " + e.getMessage() + "!", null);

@@ -34,6 +34,4 @@ public class UsuarioServicio extends GenericaServicio<Usuario, Integer> implemen
             return null;
         }
     }
-    
-    
 }

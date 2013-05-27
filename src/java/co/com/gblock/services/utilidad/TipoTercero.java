@@ -12,7 +12,8 @@ public enum TipoTercero {
 
     DUEÑO(0,"Dueño","Dueño de la licencia"),
     CLIENTE(1, "Cliente", "A quien se le venden los productos"),
-    PROVEEDOR(1, "Proveedor", "Quien vende los productos");
+    PROVEEDOR(2, "Proveedor", "Quien vende los productos"),
+    USUARIO(3, "Usuario", "Usuario del sistema");
 
     Integer id;
     String nombre;

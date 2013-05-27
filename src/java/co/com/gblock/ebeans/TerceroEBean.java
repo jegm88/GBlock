@@ -86,6 +86,7 @@ public class TerceroEBean implements Serializable {
         l.addAll(Arrays.asList(TipoTercero.values()));
         //Excluye al dueño de la seleccion
         l.remove(TipoTercero.DUEÑO);
+        l.remove(TipoTercero.USUARIO);
         return l;
     }
 

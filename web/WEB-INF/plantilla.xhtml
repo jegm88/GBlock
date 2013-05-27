@@ -9,6 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../css/layout.css" rel="stylesheet" type="text/css" />
         <link href="./../css/accordeonmenu.css" rel="stylesheet" type="text/css" />
+        <link href="./../css/estilo.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="./../js/accordeon.js"></script>
 
         <title><ui:insert name="tituloContent">Titulo Content</ui:insert></title>
@@ -31,9 +32,9 @@
                             <ui:insert name="accItem1">
                                 <li id="one" class="tareas"><a href="#one">Tareas</a>
                                     <ul class="sub-menu">
-                                        <li class="compra"><h:commandLink action="compra" immediate="true">Compra</h:commandLink></li>
-                                        <li class="venta"><h:commandLink action="venta" immediate="true">Venta</h:commandLink></li>
-                                        <li class="reporte"><h:commandLink action="reporte" immediate="true">Reporte</h:commandLink></li>
+                                        <li class="compra" ><h:commandLink action="compra" immediate="true" rendered="#{loginEBean.puede('AC')}">Compra</h:commandLink></li>
+                                        <li class="venta"><h:commandLink action="venta" immediate="true" rendered="#{loginEBean.puede('AV')}">Venta</h:commandLink></li>
+                                        <li class="reporte"><h:commandLink action="reporte" immediate="true"  rendered="#{loginEBean.puede('AR')}">Reporte</h:commandLink></li>
                                         <li class="configuracion"><h:commandLink action="configuracion" immediate="true">Configuracion</h:commandLink></li>
                                     </ul>
                                 </li>
@@ -68,7 +69,7 @@
             <div id="cont" class="left_content">
                 <p:growl id="messages" autoUpdate="true"/>
                 <div class="tituloContent">
-                    <ui:insert name="tituloContent"></ui:insert>
+                    <ui:insert name="tituloContent"/>
                 </div>
                 <div class="contenido">
                     <ui:insert name="content"></ui:insert>

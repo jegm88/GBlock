@@ -2,16 +2,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link href="css/estilo.css" rel="stylesheet" type="text/css"/>
-        <link href="img/gb.png"/>
-        <title>Login</title>
+        <title>GBlock V2</title>
     </h:head>
     <h:body>
+        <style>
+            body{
+                background: #444645;
+                color: #221;
+                font-family: "Verdana";
+                font-size: 16px;
+                margin: 0px;
+                text-align: right;
+            }
+        </style>
         <h:form id="formulario">
-            <div class="content">
+            <div class="fondo"/>
+
+            <div class="login_content">
                 <header id="hi">
                     <h1>GBlock</h1>
                 </header>
@@ -21,7 +32,7 @@
                             <h:outputLabel value="Usuario" for="txtUser"></h:outputLabel>
                         </td>
                         <td>
-                            <h:inputText id="txtUser" value="#{loginEBean.usuario.nick}" required="true"></h:inputText>
+                            <p:inputText id="txtUser" value="#{loginEBean.usuario.nick}" required="true"></p:inputText>
                         </td>
                     </tr>
                     <tr>
@@ -29,14 +40,14 @@
                             <h:outputLabel value="Password" for="txtPassword"></h:outputLabel>
                         </td>
                         <td>
-                            <h:inputSecret id="txtPassword" value="#{loginEBean.usuario.password}" required="true"></h:inputSecret>
+                            <p:password id="txtPassword" value="#{loginEBean.usuario.password}" required="true"></p:password>
                         </td>
 
                     </tr>
                     <tr>
                         <td></td>
-                        <td>
-                            <h:commandButton value="Login" action="#{loginEBean.login()}"/>
+                        <td align="right">
+                            <p:commandButton value="Login" action="#{loginEBean.login()}"/>
                         </td>
                     </tr>
                 </table>
