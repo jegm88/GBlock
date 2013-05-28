@@ -7,7 +7,7 @@
     <ui:define name="tituloContent">Bodega</ui:define>
 
     <ui:define name="dialogos">
-        <p:dialog widgetVar="bodegaConsultar" modal="true" position="center" header="Lista de Bodegas">
+        <p:dialog widgetVar="bodegaConsultar" modal="true" position="center" header="Lista de Bodegas" dynamic="true">
             <p:dataTable value="#{bodegaEBean.listaBodegas}" var="bodega" rows="5">
                 <p:column headerText="Nombre" >
                     #{bodega.nombre}
@@ -21,7 +21,7 @@
                 <p:column headerText="Accion" style="text-align: center;">
                     <p:commandButton value="Visualizar" immediate="true" action="bodega"
                                      actionListener="#{bodegaEBean.seleccionar(bodega)}" update=":frmtodo"
-                                     onsuccess="bodegaConsultar.hide()"
+                                     oncomplete="bodegaConsultar.hide()"
                                      />
                 </p:column>
             </p:dataTable>
@@ -48,7 +48,7 @@
                 <li class="guardar"><p:commandLink action="#{bodegaEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('CB') and bodegaEBean.bodega.id == null}">Guardar</p:commandLink></li>
                 <li class="modificar"><p:commandLink action="#{bodegaEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('MB') and bodegaEBean.bodega.id !=null}">Modificar</p:commandLink></li>
                 <li class="eliminar"><p:commandLink action="#{bodegaEBean.eliminar()}" update=":frmtodo" rendered="#{loginEBean.puede('EB') and bodegaEBean.bodega.id !=null}">Eliminar</p:commandLink></li>
-                <li class="consultar"><p:commandLink onclick="bodegaConsultar.show();return true;" immediate="true" update=":frmtodo">Consultar</p:commandLink></li>
+                <li class="consultar"><p:commandLink onclick="bodegaConsultar.show();" immediate="true" type="button">Consultar</p:commandLink></li>
                 <li class="imprimir"><p:commandLink update=":frmtodo" rendered="#{false}">Imprimir</p:commandLink></li>
             </ul>
         </li>

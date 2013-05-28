@@ -16,13 +16,13 @@
     </h:head>
 
     <h:body>
-        <h:form id="frmtodo">    
+        <h:form id="frmtodo1">    
             <ui:insert name="dialogos"></ui:insert>
 
             <div id="navBar">
                     <div id="tituloNavBar">
                         <div class="logo">
-                            <h:commandLink action="principal" immediate="true">GBlock V2</h:commandLink>
+                            <h:commandLink action="principal?faces-redirect=true" immediate="true">GBlock V2</h:commandLink>
                         </div>
                     </div>
 
@@ -32,10 +32,10 @@
                             <ui:insert name="accItem1">
                                 <li id="one" class="tareas"><a href="#one">Tareas</a>
                                     <ul class="sub-menu">
-                                        <li class="compra" ><h:commandLink action="compra" immediate="true" rendered="#{loginEBean.puede('AC')}">Compra</h:commandLink></li>
-                                        <li class="venta"><h:commandLink action="venta" immediate="true" rendered="#{loginEBean.puede('AV')}">Venta</h:commandLink></li>
-                                        <li class="reporte"><h:commandLink action="reporte" immediate="true"  rendered="#{loginEBean.puede('AR')}">Reporte</h:commandLink></li>
-                                        <li class="configuracion"><h:commandLink action="configuracion" immediate="true">Configuracion</h:commandLink></li>
+                                        <li class="compra" ><h:commandLink action="compra?faces-redirect=true" immediate="true" rendered="#{loginEBean.puede('AC')}">Compra</h:commandLink></li>
+                                        <li class="venta"><h:commandLink action="venta?faces-redirect=true" immediate="true" rendered="#{loginEBean.puede('AV')}">Venta</h:commandLink></li>
+                                        <li class="reporte"><h:commandLink action="reporte?faces-redirect=true" immediate="true"  rendered="#{loginEBean.puede('AR')}">Reporte</h:commandLink></li>
+                                        <li class="configuracion"><h:commandLink action="configuracion?faces-redirect=true" immediate="true">Configuracion</h:commandLink></li>
                                     </ul>
                                 </li>
                             </ui:insert>
@@ -65,7 +65,9 @@
                         </ul>
                     </div>
             </div>
+        </h:form>
 
+        <h:form id="frmtodo">    
             <div id="cont" class="left_content">
                 <p:growl id="messages" autoUpdate="true"/>
                 <div class="tituloContent">

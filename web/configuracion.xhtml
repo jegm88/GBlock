@@ -4,7 +4,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
                 template="./WEB-INF/plantilla.xhtml">
-    <ui:define name="tituloContent">Configuracion</ui:define>
+    <ui:define name="tituloContent">Configuración</ui:define>
 
     <ui:define name="dialogos">
         <p:dialog widgetVar="bodegaConsultar" modal="true" position="center" header="Lista de Bodegas">
@@ -12,10 +12,10 @@
                 <p:column headerText="Nombre" >
                     #{bodega.nombre}
                 </p:column>
-                <p:column headerText="Ubicacion">
+                <p:column headerText="Ubicación">
                     #{bodega.ubicacion}
                 </p:column>
-                <p:column headerText="Descripcion">
+                <p:column headerText="Descripción">
                     #{bodega.descripcion}
                 </p:column>
                 <p:column headerText="Accion" style="text-align: center;">
@@ -28,8 +28,10 @@
         </p:dialog>
     </ui:define>
     <ui:define name="content">
-        <p:commandLink action="bodega" update=":frmtodo" rendered="#{loginEBean.puede('AB')}">Bodega<br/></p:commandLink> 
-        <p:commandLink action="tercero" update=":frmtodo" rendered="#{loginEBean.puede('AT')}">Tercero<br/></p:commandLink>
-        <p:commandLink action="usuario" update=":frmtodo" rendered="#{loginEBean.puede('AU')}">Usuario<br/></p:commandLink> 
+        <p:commandLink action="articulo?faces-redirect=true" update=":frmtodo" rendered="#{loginEBean.puede('AA')}">Articulo<br/></p:commandLink> 
+        <p:commandLink action="catarticulo?faces-redirect=true" update=":frmtodo" rendered="#{loginEBean.puede('ACA')}">Categoría Articulo<br/></p:commandLink> 
+        <p:commandLink action="bodega?faces-redirect=true" update=":frmtodo" rendered="#{loginEBean.puede('AB')}">Bodega<br/></p:commandLink> 
+        <p:commandLink action="tercero?faces-redirect=true" update=":frmtodo" rendered="#{loginEBean.puede('AT')}">Tercero<br/></p:commandLink>
+        <p:commandLink action="usuario?faces-redirect=true" update=":frmtodo" rendered="#{loginEBean.puede('AU')}">Usuario<br/></p:commandLink> 
     </ui:define>
 </ui:composition>

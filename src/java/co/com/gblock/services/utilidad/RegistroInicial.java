@@ -85,7 +85,17 @@ public class RegistroInicial {
         Permiso p23 = new Permiso("MT", "Modificar Tercero", 1);
         Permiso p24 = new Permiso("ET", "Eliminar Tercero", 1);
         
-        Permiso p25 = new Permiso("AR", "Acceso a Reportes", 1);
+        Permiso p25 = new Permiso("AA", "Acceso a Articulo", 1);
+        Permiso p26 = new Permiso("CA", "Crear Articulo", 1);
+        Permiso p27 = new Permiso("MA", "Modificar Articulo", 1);
+        Permiso p28 = new Permiso("EA", "Eliminar Articulo", 1);
+
+        Permiso p29 = new Permiso("ACA", "Acceso a Categoria Articulo", 1);
+        Permiso p30 = new Permiso("CCA", "Crear Categoria Articulo", 1);
+        Permiso p31 = new Permiso("MCA", "Modificar Categoria Articulo", 1);
+        Permiso p32 = new Permiso("ECA", "Eliminar Categoria Articulo", 1);
+        
+        Permiso p33 = new Permiso("AR", "Acceso a Reportes", 1);
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Permisos Administrador por defecto">
@@ -113,6 +123,14 @@ public class RegistroInicial {
         perAdmin.add(p23);
         perAdmin.add(p24);
         perAdmin.add(p25);
+        perAdmin.add(p26);
+        perAdmin.add(p27);
+        perAdmin.add(p28);
+        perAdmin.add(p29);
+        perAdmin.add(p30);
+        perAdmin.add(p31);
+        perAdmin.add(p32);
+        perAdmin.add(p33);
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Permisos Vendedor por defecto">
@@ -125,6 +143,14 @@ public class RegistroInicial {
         perVendedor.add(p22);
         perVendedor.add(p23);
         perVendedor.add(p24);
+        perVendedor.add(p25);
+        perVendedor.add(p26);
+        perVendedor.add(p27);
+        perVendedor.add(p28);
+        perVendedor.add(p29);
+        perVendedor.add(p30);
+        perVendedor.add(p31);
+        perVendedor.add(p32);
         //</editor-fold>
 
         Perfil perfil1 = new Perfil("Admnistrador", "Acceso a todo el sistema", 1);

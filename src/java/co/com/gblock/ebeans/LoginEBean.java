@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
 public class LoginEBean implements Serializable {
 
     private static final Logger LOGGER = Logger.getLogger("LoginBean");
-    private String ppal = "principal";
+    private String ppal = "principal?faces-redirect=true";
     private String login = "index?faces-redirect=true";
     @EJB
     private IUsuarioServicio usuarioServicio;
