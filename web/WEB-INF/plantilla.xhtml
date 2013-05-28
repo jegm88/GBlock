@@ -9,61 +9,61 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../css/layout.css" rel="stylesheet" type="text/css" />
         <link href="./../css/accordeonmenu.css" rel="stylesheet" type="text/css" />
-        <link href="./../css/estilo.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="./../js/accordeon.js"></script>
-
+        <ui:insert name="head"/>
         <title><ui:insert name="tituloContent">Titulo Content</ui:insert></title>
     </h:head>
 
     <h:body>
+        <ui:insert name="body"/>
         <h:form id="frmtodo1">    
-            <ui:insert name="dialogos"></ui:insert>
+            <ui:insert name="dialogos"/>
 
             <div id="navBar">
-                    <div id="tituloNavBar">
-                        <div class="logo">
-                            <h:commandLink action="principal?faces-redirect=true" immediate="true">GBlock V2</h:commandLink>
-                        </div>
+                <div id="tituloNavBar">
+                    <div class="logo">
+                        <h:commandLink action="principal?faces-redirect=true" immediate="true">GBlock V2</h:commandLink>
                     </div>
+                </div>
 
-                    <div id="nav">
-                        <ui:insert name="nav"></ui:insert>
-                        <ul class="accordion">
-                            <ui:insert name="accItem1">
-                                <li id="one" class="tareas"><a href="#one">Tareas</a>
-                                    <ul class="sub-menu">
-                                        <li class="compra" ><h:commandLink action="compra?faces-redirect=true" immediate="true" rendered="#{loginEBean.puede('AC')}">Compra</h:commandLink></li>
-                                        <li class="venta"><h:commandLink action="venta?faces-redirect=true" immediate="true" rendered="#{loginEBean.puede('AV')}">Venta</h:commandLink></li>
-                                        <li class="reporte"><h:commandLink action="reporte?faces-redirect=true" immediate="true"  rendered="#{loginEBean.puede('AR')}">Reporte</h:commandLink></li>
-                                        <li class="configuracion"><h:commandLink action="configuracion?faces-redirect=true" immediate="true">Configuracion</h:commandLink></li>
-                                    </ul>
-                                </li>
-                            </ui:insert>
-                            <ui:insert name="accItem2">
-                                <!--
-                                               <li id="two" class="opciones"><a href="#two">Opciones</a>
-                                                   <ul class="sub-menu">
-                                                       <li class="nuevo"><ui:insert name="opNuevo"></ui:insert></li>
-                                                       <li class="guardar"><ui:insert name="opGuardar"></ui:insert></li>
-                                                       <li class="modificar"><ui:insert name="opModificar"></ui:insert></li>
-                                                       <li class="eliminar"><ui:insert name="opEliminar"></ui:insert></li>
-                                                       <li class="error"><ui:insert name="opReportar"></ui:insert></li>
-                                                       <li class="consultar"><ui:insert name="opConsultar"></ui:insert></li>
-                                                       <li class="imprimir"><ui:insert name="opImprimir"></ui:insert></li>
-                                                   </ul>
-                                               </li>
-                                -->
-                            </ui:insert>
-                            <ui:insert name="accItem3">
-                                <li id="three" class="usuarios"><a href="#three">Usuario: #{loginEBean.usuario.nick}</a>
-                                    <ul class="sub-menu">
-                                        <li class="configuracion"><h:commandLink immediate="true">Configurar Cuenta</h:commandLink></li>
-                                        <li class="logout"><h:commandLink action="#{loginEBean.logout()}" immediate="true">Cerrar Sesion</h:commandLink></li>
-                                    </ul>
-                                </li>
-                            </ui:insert>
-                        </ul>
-                    </div>
+                <div id="nav">
+                    <ui:insert name="nav"></ui:insert>
+                    <ul class="accordion">
+                        <ui:insert name="accItem1">
+                            <li id="one" class="tareas"><a href="#one">Tareas</a>
+                                <ul class="sub-menu">
+                                    <li class="compra" ><h:commandLink action="compra?faces-redirect=true" immediate="true" rendered="#{loginEBean.puede('AC')}">Compra</h:commandLink></li>
+                                    <li class="venta"><h:commandLink action="venta?faces-redirect=true" immediate="true" rendered="#{loginEBean.puede('AV')}">Venta</h:commandLink></li>
+                                    <li class="reporte"><h:commandLink action="reporte?faces-redirect=true" immediate="true"  rendered="#{loginEBean.puede('AR')}">Reporte</h:commandLink></li>
+                                    <li class="configuracion"><h:commandLink action="configuracion?faces-redirect=true" immediate="true">Configuracion</h:commandLink></li>
+                                </ul>
+                            </li>
+                        </ui:insert>
+                        <ui:insert name="accItem2">
+                            <!--
+                                           <li id="two" class="opciones"><a href="#two">Opciones</a>
+                                               <ul class="sub-menu">
+                                                   <li class="nuevo"><ui:insert name="opNuevo"></ui:insert></li>
+                                                   <li class="guardar"><ui:insert name="opGuardar"></ui:insert></li>
+                                                   <li class="modificar"><ui:insert name="opModificar"></ui:insert></li>
+                                                   <li class="eliminar"><ui:insert name="opEliminar"></ui:insert></li>
+                                                   <li class="error"><ui:insert name="opReportar"></ui:insert></li>
+                                                   <li class="consultar"><ui:insert name="opConsultar"></ui:insert></li>
+                                                   <li class="imprimir"><ui:insert name="opImprimir"></ui:insert></li>
+                                               </ul>
+                                           </li>
+                            -->
+                        </ui:insert>
+                        <ui:insert name="accItem3">
+                            <li id="three" class="usuarios"><a href="#three">Usuario: #{loginEBean.usuario.nick}</a>
+                                <ul class="sub-menu">
+                                    <li class="configuracion"><h:commandLink immediate="true">Configurar Cuenta</h:commandLink></li>
+                                    <li class="logout"><h:commandLink action="#{loginEBean.logout()}" immediate="true">Cerrar Sesion</h:commandLink></li>
+                                </ul>
+                            </li>
+                        </ui:insert>
+                    </ul>
+                </div>
             </div>
         </h:form>
 

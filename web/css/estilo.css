@@ -5,26 +5,10 @@
     Description:
         Purpose of the stylesheet follows.
 */
-.login_content{
-    background: rgba(10,10,10,0.66);
-    border-radius: 0.6em;
-    -webkit-border-radius:0.6em;
-    box-shadow: rgba(0,0,0,0.9) 10px,10px,10px;
-    color: #EEE;
-    margin: 1em auto;
-    padding: 2em;
-    width: 300px;
-    text-align: center;
-    font-family: Verdana,Arial,Helvetica,sans-serif;
-}
-
-.fondo{
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
-    content: '';
-    width: 387px;
-    height: 169px;
-    background-image: url(../img/lego-bot.jpg);
-    z-index:-1;
+body{
+    background: #444645;
+    color: #efefef;
+    font-family: "Verdana";
+    font-size: 16px;
+               text-align: justify;
 }

@@ -86,7 +86,7 @@ public class BodegaEBean implements Serializable {
     public void seleccionar(Bodega bodega) {
         LOGGER.log(Level.INFO, "Seleccionando bodega ({0})", this.getClass().getSimpleName());
         this.bodega = bodega;
-        Mensajes.agregarInfoMensaje("Cargando datos de bodega " + bodega.getNombre(), null);
+        Mensajes.agregarInfoMensaje("¡Datos de bodega"+ (bodega.getNombre())+" cargados! ", null);
     }
 
     public void eliminar() {
