@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,6 +24,11 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "articulos")
+@NamedQueries({
+    @NamedQuery(name = "Articulo.buscarPorNombre", query = "SELECT o FROM Articulo o WHERE o.nombre = :nombre AND o.estado <> 0"),
+    @NamedQuery(name = "Articulo.listarHabilitados", query = "SELECT o FROM Articulo o WHERE o.estado <> 0"),
+    @NamedQuery(name = "Articulo.listarArticulo", query = "SELECT o FROM Articulo o WHERE o.categoria.nombre = :categoria AND  o.estado<> 0")
+})
 public class Articulo implements Serializable {
 
     @Id

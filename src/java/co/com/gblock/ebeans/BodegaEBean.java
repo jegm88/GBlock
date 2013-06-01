@@ -51,8 +51,9 @@ public class BodegaEBean implements Serializable {
         LOGGER.log(Level.INFO, "Registrando bodega ({0})", this.getClass().getSimpleName());
         try {
             if (bodega.getId() == null) {
+                LOGGER.log(Level.INFO, "entro");
                 Bodega tmp = bodegaServicio.consultarPorNombre(bodega.getNombre());
-                if (tmp != null) {
+                if (tmp!= null) {
                     throw new Exception("Ya existe una bodega con el nombre: " + bodega.getNombre());
                 } else {
                     LOGGER.log(Level.INFO, "Guardando bodega ({0})", bodega.getNombre());

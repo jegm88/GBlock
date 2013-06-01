@@ -9,14 +9,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../css/layout.css" rel="stylesheet" type="text/css" />
         <link href="./../css/accordeonmenu.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="./../js/accordeon.js"></script>
         <ui:insert name="head"/>
         <title><ui:insert name="tituloContent">Titulo Content</ui:insert></title>
     </h:head>
 
     <h:body>
         <ui:insert name="body"/>
-        <h:form id="frmtodo1">    
+        <h:form id="frmtodo">    
             <ui:insert name="dialogos"/>
 
             <div id="navBar">
@@ -65,9 +64,6 @@
                     </ul>
                 </div>
             </div>
-        </h:form>
-
-        <h:form id="frmtodo">    
             <div id="cont" class="left_content">
                 <p:growl id="messages" autoUpdate="true"/>
                 <div class="tituloContent">
@@ -77,6 +73,22 @@
                     <ui:insert name="content"></ui:insert>
                 </div>
             </div>
+            <script>
+                $(document).ready(function() {
+                    var accordion_head = $('.accordion > li > a');
+                    var accordion_body = $('.accordion li > .sub-menu');
+                    accordion_head.first().addClass('active').next().slideDown('normal');
+                    accordion_head.on('click', function(event) {
+                        event.preventDefault();
+                        if ($(this).attr('class') !== 'active') {
+                            accordion_body.slideUp('normal');
+                            $(this).next().stop(true, true).slideToggle('normal');
+                            accordion_head.removeClass('active');
+                            $(this).addClass('active');
+                        }
+                    });
+                });
+            </script>
         </h:form>
     </h:body>
 </html>

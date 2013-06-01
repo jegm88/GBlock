@@ -5,6 +5,7 @@
 package co.com.gblock.services.interfaceServicios;
 
 import co.com.gblock.entity.TipoDocumento;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -14,4 +15,7 @@ import javax.ejb.Local;
 @Local
 public interface ITipoDocumentoServicio extends IGenericaServicio<TipoDocumento, Integer> {
     
+    TipoDocumento consultarPorNombre(String nombre);
+
+    List<TipoDocumento> listarHabilitados();
 }

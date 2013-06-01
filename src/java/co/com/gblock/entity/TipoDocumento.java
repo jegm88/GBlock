@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,6 +22,10 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "tipos_documento")
+@NamedQueries({
+    @NamedQuery(name = "TipoDocumento.buscarPorNombre", query = "SELECT o FROM TipoDocumento o WHERE o.nombre = :nombre AND o.estado <> 0"),
+    @NamedQuery(name = "TipoDocumento.listarHabilitados", query = "SELECT o FROM TipoDocumento o WHERE o.estado <> 0")
+})
 public class TipoDocumento implements Serializable {
 
     @Id

@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./WEB-INF/plantilla.xhtml">
+
+    <ui:define name="tituloContent">Articulo</ui:define>
+
+    <ui:define name="dialogos">
+        <p:dialog widgetVar="articuloConsultar" modal="true" position="center" header="Lista de Articulos"
+                  resizable="false" maximizable="true" showEffect="puff" hideEffect="highlight">
+            <p:dataTable value="#{articuloEBean.listaArticulos}" var="articulo" rows="5">
+                <p:column headerText="Nombre">
+                    #{articulo.nombre}
+                </p:column>
+                <p:column headerText="Marca" >
+                    #{articulo.marca}
+                </p:column>
+                <p:column headerText="Modelo" >
+                    #{articulo.modelo}
+                </p:column>
+                <p:column headerText="Valor Unitario" >
+                    #{articulo.valorUnit}
+                </p:column>
+                <p:column headerText="Iva" >
+                    #{articulo.iva}
+                </p:column>
+                <p:column headerText="Iva Porcentaje" >
+                    #{articulo.ivaPtj}
+                </p:column>
+                <p:column headerText="Categoria" >
+                    #{articulo.categoria.nombre}
+                </p:column>
+                <p:column headerText="Observaciones" >
+                    #{articulo.observaciones}
+                </p:column>
+                <p:column headerText="Descripcion">
+                    #{articulo.descripcion}
+                </p:column>
+
+                <p:column headerText="Accion" style="text-align: center;">
+                    <p:commandButton value="Visualizar" immediate="true" action="articulo"
+                                     actionListener="#{articuloEBean.seleccionar(articulo)}" update=":frmtodo"
+                                     onsuccess="articuloConsultar.hide()"/>
+                </p:column>
+            </p:dataTable>
+        </p:dialog>
+    </ui:define>
+    <ui:define name="content">
+        <div id="regbod" class="registros">
+            <h:panelGrid columns="2">
+                <h:outputText value="Nombre"/>
+                <p:inputText id="nombre" value="#{articuloEBean.articulo.nombre}" required="true"
+                             requiredMessage="El campo nombre no puede ir vacio"/>
+                <h:outputText value="Marca"/>
+                <p:inputText id="marca" value="#{articuloEBean.articulo.marca}"/>
+
+                <h:outputText value="Modelo"/>
+                <p:inputText id="modelo" value="#{articuloEBean.articulo.modelo}"/>
+
+                <h:outputText value="Categoria"/>
+                <h:selectOneMenu value="#{categoriaArticuloEBean.categoriaArticulo.id}">
+                    <f:selectItem itemLabel="|Seleccione una categoria|" noSelectionOption="true"/>
+                    <f:selectItems value="#{categoriaArticuloEBean.listaCategoriaArticulos}" var="cate" itemLabel="#{cate.nombre}" />
+                </h:selectOneMenu>
+
+                <h:outputText value="Valor Unitario"/>
+                <p:inputText id="valorunit" value="#{articuloEBean.articulo.valorUnit}"/>
+
+                <h:outputText value="Iva porcentaje"/>
+                <p:inputText id="ivaptj" value="#{articuloEBean.articulo.ivaPtj}"/>
+
+                <h:outputText value="Iva"/>
+                <p:inputText id="iva" value="#{articuloEBean.articulo.iva}"/>
+
+                <h:outputText value="Observaciones"/>
+                <p:inputTextarea id="observaciones" value="#{articuloEBean.articulo.observaciones}" autoResize="true"/>
+
+                <h:outputText value="Descripcion"/>
+                <p:inputTextarea id="descripcion" value="#{articuloEBean.articulo.descripcion}" autoResize="true"/>
+            </h:panelGrid>
+        </div>
+        <p:accordionPanel id="panel"  value="#{categoriaArticuloEBean.listaCategoriaArticulos}" var="cate" dynamic="true" multiple="true" 
+                          onTabShow="#{articuloEBean.clasificar(cate.nombre)}">
+            <p:tab title="#{cate.nombre}">
+
+                <p:dataList id="lista"  value="#{articuloEBean.clasificados}" var="ar" itemType="none">
+                    <p:commandLink value="#{ar.nombre}"/>
+                </p:dataList>
+            </p:tab>
+        </p:accordionPanel>
+    </ui:define>
+
+    <ui:define name="accItem2">
+        <li id="two" class="opciones"><a href="#two">Opciones</a>
+            <ul class="sub-menu">
+                <li class="nuevo"><p:commandLink action="#{articuloEBean.nuevo()}"  update=":frmtodo" rendered="#{loginEBean.puede('CA')}">Nuevo</p:commandLink></li>
+                <li class="guardar"><p:commandLink action="#{articuloEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('CA') and articuloEBean.articulo.id ==null}">Guardar</p:commandLink></li>
+                <li class="modificar"><p:commandLink action="#{articuloEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('MA') and articuloEBean.articulo.id !=null}">Modificar</p:commandLink></li>
+                <li class="eliminar"><p:commandLink action="#{articuloEBean.eliminar()}" update=":frmtodo" rendered="#{loginEBean.puede('EA') and articuloEBean.articulo.id !=null}">Eliminar</p:commandLink></li>
+                <li class="consultar"><p:commandLink onclick="articuloConsultar.show();" immediate="true" type="button">Consultar</p:commandLink></li>
+                <li class="imprimir"><p:commandLink update=":frmtodo" rendered="#{false}">Imprimir</p:commandLink></li>
+            </ul>
+        </li>
+    </ui:define>
+</ui:composition>
+

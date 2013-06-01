@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./WEB-INF/plantilla.xhtml">
+    <ui:define name="tituloContent">Categorias de Articulo</ui:define>
+    
+    <ui:define name="dialogos">
+        <p:dialog widgetVar="categoriaConsultar" modal="true" position="center" header="Lista de Categorias de Articulo">
+            <p:dataTable value="#{categoriaArticuloEBean.listaCategoriaArticulos}" var="categoria" rows="5">
+                <p:column headerText="Nombre" >
+                    #{categoria.nombre}
+                </p:column>
+                <p:column headerText="Descripcion">
+                    #{categoria.descripcion}
+                </p:column>
+
+                <p:column headerText="Accion" style="text-align: center;">
+                    <p:commandButton value="Visualizar" immediate="true" action="categoriaArticulo"
+                                     actionListener="#{categoriaArticuloEBean.seleccionar(categoria)}" update=":frmtodo"
+                                     onsuccess="categoriaConsultar.hide()"/>
+                </p:column>
+            </p:dataTable>
+        </p:dialog>
+    </ui:define>
+    <ui:define name="content">
+        <div id="regbod" class="registros">
+            <h:panelGrid columns="2">
+                <h:outputText value="Nombre"/>
+                <p:inputText id="nombre" value="#{categoriaArticuloEBean.categoriaArticulo.nombre}" required="true"
+                             requiredMessage="El campo nombre no puede ir vacio"/>
+                <h:outputText value="Descripcion"/>
+                <p:inputTextarea id="descripcion" value="#{categoriaArticuloEBean.categoriaArticulo.descripcion}"/>
+            </h:panelGrid>
+        </div>
+    </ui:define>
+    
+    <ui:define name="accItem2">
+        <li id="two" class="opciones"><a href="#two">Opciones</a>
+            <ul class="sub-menu">
+                <li class="nuevo"><p:commandLink action="#{categoriaArticuloEBean.nuevo()}"  update=":frmtodo" rendered="#{loginEBean.puede('CCA')}">Nuevo</p:commandLink></li>
+                <li class="guardar"><p:commandLink action="#{categoriaArticuloEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('CCA') and categoriaArticuloEBean.categoriaArticulo.id ==null}">Guardar</p:commandLink></li>
+                <li class="modificar"><p:commandLink action="#{categoriaArticuloEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('MCA') and categoriaArticuloEBean.categoriaArticulo.id !=null}">Modificar</p:commandLink></li>
+                <li class="eliminar"><p:commandLink action="#{categoriaArticuloEBean.eliminar()}" update=":frmtodo" rendered="#{loginEBean.puede('ECA') and categoriaArticuloEBean.categoriaArticulo.id!=null}">Eliminar</p:commandLink></li>
+                <li class="consultar"><p:commandLink onclick="categoriaConsultar.show();" immediate="true" type="button">Consultar</p:commandLink></li>
+                <li class="imprimir"><p:commandLink update=":frmtodo" rendered="#{false}">Imprimir</p:commandLink></li>
+            </ul>
+        </li>
+    </ui:define>
+</ui:composition>
+

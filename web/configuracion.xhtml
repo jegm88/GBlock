@@ -29,7 +29,7 @@
     </ui:define>
     <ui:define name="content">
         <p:commandLink action="articulo?faces-redirect=true" update=":frmtodo" rendered="#{loginEBean.puede('AA')}">Articulo<br/></p:commandLink> 
-        <p:commandLink action="catarticulo?faces-redirect=true" update=":frmtodo" rendered="#{loginEBean.puede('ACA')}">Categoría Articulo<br/></p:commandLink> 
+        <p:commandLink action="categoriaArticulo?faces-redirect=true" update=":frmtodo" rendered="#{loginEBean.puede('ACA')}">Categoría Articulo<br/></p:commandLink> 
         <p:commandLink action="bodega?faces-redirect=true" update=":frmtodo" rendered="#{loginEBean.puede('AB')}">Bodega<br/></p:commandLink> 
         <p:commandLink action="tercero?faces-redirect=true" update=":frmtodo" rendered="#{loginEBean.puede('AT')}">Tercero<br/></p:commandLink>
         <p:commandLink action="usuario?faces-redirect=true" update=":frmtodo" rendered="#{loginEBean.puede('AU')}">Usuario<br/></p:commandLink> 

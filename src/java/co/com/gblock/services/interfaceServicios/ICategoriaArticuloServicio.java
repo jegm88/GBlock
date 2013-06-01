@@ -4,7 +4,9 @@
  */
 package co.com.gblock.services.interfaceServicios;
 
+import co.com.gblock.entity.Articulo;
 import co.com.gblock.entity.CategoriaArticulo;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -14,4 +16,7 @@ import javax.ejb.Local;
 @Local
 public interface ICategoriaArticuloServicio extends IGenericaServicio<CategoriaArticulo, Integer> {
     
+    CategoriaArticulo consultarPorNombre(String nombre);
+
+    List<CategoriaArticulo> listarHabilitados();
 }
