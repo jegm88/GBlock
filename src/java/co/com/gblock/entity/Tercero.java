@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,11 +52,11 @@ public class Tercero implements Serializable {
     private String apellidos;
     @Size(max = 50)
     private String direccion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tercero")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tercero", fetch = FetchType.LAZY)
     private List<Telefono> telefonos;
     @Enumerated(EnumType.ORDINAL)
     private TipoTercero tipo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tercero")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tercero", fetch = FetchType.LAZY)
     private List<Correo> correos;
     @NotNull
     private Integer estado;

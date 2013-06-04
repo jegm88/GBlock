@@ -50,10 +50,10 @@ public class BodegaEBean implements Serializable {
     public void guardar() {
         LOGGER.log(Level.INFO, "Registrando bodega ({0})", this.getClass().getSimpleName());
         try {
+            Bodega tmp = bodegaServicio.consultarPorNombre(bodega.getNombre());
             if (bodega.getId() == null) {
                 LOGGER.log(Level.INFO, "entro");
-                Bodega tmp = bodegaServicio.consultarPorNombre(bodega.getNombre());
-                if (tmp!= null) {
+                if (tmp != null) {
                     throw new Exception("Ya existe una bodega con el nombre: " + bodega.getNombre());
                 } else {
                     LOGGER.log(Level.INFO, "Guardando bodega ({0})", bodega.getNombre());
@@ -62,8 +62,7 @@ public class BodegaEBean implements Serializable {
                     Mensajes.agregarInfoMensaje("¡Bodega " + bodega.getNombre() + " guardada exitosamente!", null);
                 }
             } else {
-                Bodega tmp = bodegaServicio.consultarPorNombre(bodega.getNombre());
-                if (tmp != null && (!bodega.getId().equals(tmp.getId())&& tmp.getEstado()!=0)) {
+                if (tmp != null && (!bodega.getId().equals(tmp.getId()) && tmp.getEstado() != 0)) {
                     throw new Exception("Ya existe una bodega con el nombre: " + bodega.getNombre());
                 } else {
                     LOGGER.log(Level.INFO, "Modificando datos de la bodega ({0})", bodega.getNombre());
@@ -87,7 +86,7 @@ public class BodegaEBean implements Serializable {
     public void seleccionar(Bodega bodega) {
         LOGGER.log(Level.INFO, "Seleccionando bodega ({0})", this.getClass().getSimpleName());
         this.bodega = bodega;
-        Mensajes.agregarInfoMensaje("¡Datos de bodega"+ (bodega.getNombre())+" cargados! ", null);
+        Mensajes.agregarInfoMensaje("¡Datos de bodega" + (bodega.getNombre()) + " cargados! ", null);
     }
 
     public void eliminar() {

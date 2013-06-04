@@ -1,65 +1,101 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:body>
-        <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" template="./WEB-INF/plantilla.xhtml">
-            <ui:define name="tituloContent">Tercero</ui:define>
-            <ui:define name="content">
-                <h:form>
-                    <div id="regter" class="registros">
-                        <h:panelGrid columns="2" >
-                            <h:outputText value="Tipo de Tercero"/>
-                            <p:selectOneMenu value="#{terceroEBean.tercero.tipo}" required="true">
-                                <f:selectItem itemLabel="|Seleccione un tipo|" noSelectionOption="true"/>
-                                <f:selectItems value="#{terceroEBean.listaTipoTerceros}" var="tipter" itemLabel="#{tipter.nombre}" itemValue="#{tipter}"/>
-                            </p:selectOneMenu>
-                            <h:outputText value="Numero de Identificacion"/>
-                            <p:inputText value="#{terceroEBean.tercero.numeroId}" required="true"/>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./WEB-INF/plantilla.xhtml">
+    <ui:define name="tituloContent">Tercero</ui:define>
 
-                            <h:outputText value="Tipo de Identificacion"/>
-                            <p:inputText value="#{terceroEBean.tercero.tipoId}" required="true"/>
+    <ui:define name="dialogos">
+        <p:dialog widgetVar="terceroConsultar" modal="true" position="center" header="Lista de Terceros" dynamic="true">
+            <p:dataTable value="#{terceroEBean.listaTerceros}" var="tercero" rows="5">
+                <p:column headerText="Id">
+                    #{tercero.numeroId}
+                </p:column>
+                <p:column headerText="Nombre" >
+                    #{tercero.nombres}
+                </p:column>
+                <p:column headerText="Apellido" >
+                    #{tercero.apellidos}
+                </p:column>
+                <p:column headerText="Tipo">
+                    #{tercero.tipo}
+                </p:column>
+                <p:column headerText="Accion" style="text-align: center;">
+                    <p:commandButton value="Ver" immediate="true" action="tercero"
+                                     actionListener="#{terceroEBean.seleccionar(tercero)}" update=":frmtodo"
+                                     oncomplete="terceroConsultar.hide()"
+                                     />
+                </p:column>
+            </p:dataTable>
+        </p:dialog>
+    </ui:define>
+    <ui:define name="content">
+        <h:panelGrid columns="3" >
+            <h:outputText value="Tipo de Tercero" rendered='#{terceroEBean.tercero.id==null}'/>
+            <p:selectOneMenu value="#{terceroEBean.tipo}" required="true" rendered="#{terceroEBean.tercero.id==null}">
+                <f:selectItems value="#{terceroEBean.listaTipoTerceros}" />
+            </p:selectOneMenu>
+            <h:outputText value="" rendered="#{terceroEBean.tercero.id==null}"/>
+            
+            <h:outputText value="Tipo de Identificación"/>
+            <p:inputText value="#{terceroEBean.tercero.tipoId}" readonly="#{terceroEBean.tercero.id!=null}" required="true"/>
+            <br/>
 
-                            <h:outputText value="Digito de Verificacion"/>
-                            <p:inputText value="#{terceroEBean.tercero.digitoVerificacion}"/>
+            <h:outputText value="Numero de Identificación"/>
+            <h:panelGroup>
+                <p:inputText value="#{terceroEBean.tercero.numeroId}" readonly="#{terceroEBean.tercero.id!=null}" required="true"/>
+                <p:inputText value="#{terceroEBean.tercero.digitoVerificacion}" size="1" readonly="#{terceroEBean.tercero.id!=null}"/>
+            </h:panelGroup>
+            <br/>
 
-                            <h:outputText value="Nombres"/>
-                            <p:inputText value="#{terceroEBean.tercero.nombres}" required="true"/>
+            <h:outputText value="Nombres"/>
+            <p:inputText value="#{terceroEBean.tercero.nombres}" required="true"/>
+            <br/>
+            <h:outputText value="Apellidos"/>
+            <p:inputText value="#{terceroEBean.tercero.apellidos}" required="true"/>
+            <br/>
+            <h:outputText value="Direccion"/>
+            <p:inputText value="#{terceroEBean.tercero.direccion}" required="true"/>
+            <br/>
+            <h:panelGroup></h:panelGroup>
 
-                            <h:outputText value="Apellidos"/>
-                            <p:inputText value="#{terceroEBean.tercero.apellidos}" required="true"/>
+            <p:dataTable id="tabtel" value="#{terceroEBean.listaTelefonos}" var="tel" editable="true">
+                <f:facet name="header">
+                    <p:inputText value="#{telefono.numero}" immediate="true" valueChangeListener="#{telefono.setNumero}" />
+                    <p:commandButton value="+" actionListener="#{terceroEBean.addTelefono(telefono)}" update="tabtel" title="Agregar" immediate="true" style="font-size: 0.8em;" />
+                </f:facet>
+                <p:column headerText="Teléfonos">
+                    <p:inputText value="#{tel.numero}" disabled="true"/>
+                    <p:commandButton value="-" action="#{terceroEBean.eliminarTelefono(tel)}" update="tabtel" immediate="true" style="font-size: 0.8em;" />
+                </p:column>
+            </p:dataTable>
 
-                            <h:outputText value="Direccion"/>
-                            <p:inputText value="#{terceroEBean.tercero.direccion}" required="true"/>
+            <p:dataTable id="tabcorr" value="#{terceroEBean.listaCorreos}" var="cor" editable="true" rows="5">
+                <f:facet name="header">
+                    <p:inputText value="#{correo.email}" immediate="true" valueChangeListener="#{correo.setEmail}" />
+                    <p:commandButton value="+" actionListener="#{terceroEBean.addCorreo(correo)}" update="tabcorr" title="Agregar" immediate="true" style="font-size: 0.8em;"/>
+                </f:facet>
+                <p:column headerText="Correos">
+                    <p:inputText id="t" value="#{cor.email}" disabled="true"/>
+                    <p:commandButton value="-" actionListener="#{terceroEBean.eliminarCorreo(cor)}" update="tabcorr" title="Eliminar" immediate="true" style="font-size: 0.8em;" />
+                </p:column>
+            </p:dataTable>
+            
+        </h:panelGrid>
+    </ui:define>
 
-                            <p:dataTable id="tabtel" value="#{terceroEBean.listaTelefonos}" var="tel" editable="true">
-                                <f:facet name="header">
-                                    <p:inputText value="#{telefono.numero}" immediate="true" valueChangeListener="#{telefono.setNumero}" />
-                                    <p:commandButton value="+" actionListener="#{terceroEBean.addTelefono(telefono)}" update="tabtel" title="Agregar" immediate="true" style="font-size: 0.8em;" />
-                                </f:facet>
-                                <p:column headerText="Telefonos">
-                                    <p:inputText value="#{tel.numero}" immediate="true" valueChangeListener="#{tel.setNumero}" disabled="true"/>
-                                    <p:commandButton value="-" action="#{terceroEBean.eliminarTelefono(tel)}" update="tabtel" immediate="true" style="font-size: 0.8em;" />
-                                </p:column>
-                            </p:dataTable>
-
-                            <p:dataTable id="tabcorr" value="#{terceroEBean.listaCorreos}" var="cor" editable="true" rows="5">
-                                <f:facet name="header">
-                                    <p:inputText value="#{correo.email}" immediate="true" valueChangeListener="#{correo.setEmail}" />
-                                    <p:commandButton value="+" actionListener="#{terceroEBean.addCorreo(correo)}" update="tabcorr" title="Agregar" immediate="true" style="font-size: 0.8em;"/>
-                                </f:facet>
-                                <p:column headerText="Correos">
-                                    <p:inputText id="t" value="#{cor.email}" immediate="true" valueChangeListener="#{cor.setEmail}"  disabled="true"/>
-                                    <p:commandButton value="-" actionListener="#{terceroEBean.eliminarCorreo(cor)}" update="tabcorr" title="Eliminar" immediate="true" style="font-size: 0.8em;" />
-                                </p:column>
-                            </p:dataTable>
-                        </h:panelGrid>
-                    </div>
-                </h:form>
-            </ui:define>
-        </ui:composition>
-    </h:body>
-</html>
+    <ui:define name="accItem2">
+        <li id="two" class="opciones"><a href="#two">Opciones</a>
+            <ul class="sub-menu">
+                <li class="nuevo"><p:commandLink action="#{terceroEBean.nuevo()}"  update=":frmtodo" rendered="#{loginEBean.puede('CT')}">Nuevo</p:commandLink></li>
+                <li class="guardar"><p:commandLink action="#{terceroEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('CT') and terceroEBean.tercero.id == null}">Guardar</p:commandLink></li>
+                <li class="modificar"><p:commandLink action="#{terceroEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('MT') and terceroEBean.tercero.id !=null}">Modificar</p:commandLink></li>
+                <li class="eliminar"><p:commandLink action="#{terceroEBean.eliminar()}" update=":frmtodo" rendered="#{loginEBean.puede('ET') and terceroEBean.tercero.id !=null}">Eliminar</p:commandLink></li>
+                <li class="consultar"><p:commandLink onclick="terceroConsultar.show();" immediate="true" type="button">Consultar</p:commandLink></li>
+                <li class="imprimir"><p:commandLink update=":frmtodo" rendered="#{false}">Imprimir</p:commandLink></li>
+            </ul>
+        </li>
+    </ui:define>
+</ui:composition>
 

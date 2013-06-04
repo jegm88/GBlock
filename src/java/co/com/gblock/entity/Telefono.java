@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -32,8 +33,7 @@ public class Telefono implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
-    @Size(min = 1, max = 50)
+    //@Pattern(regexp="^\\d+$", message="Teléfono no válido")
     private String numero;
     @Size(max = 50)
     private String tipo;

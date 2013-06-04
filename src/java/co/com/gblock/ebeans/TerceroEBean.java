@@ -11,9 +11,9 @@ import co.com.gblock.services.interfaceServicios.ICorreoServicio;
 import co.com.gblock.services.interfaceServicios.ITelefonoServicio;
 import co.com.gblock.services.utilidad.TipoTercero;
 import co.com.gblock.services.interfaceServicios.ITerceroServicio;
+import co.com.gblock.services.utilidad.Mensajes;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +33,7 @@ public class TerceroEBean implements Serializable {
     private static final Logger LOGGER = Logger.getLogger("TerceroEBean");
     @EJB
     private ITerceroServicio terceroServicio;
-    private Tercero tercero = new Tercero();
+    private Tercero tercero;
     private List<Tercero> listaTerceros;
     @EJB
     private ITelefonoServicio telefonoServicio;
@@ -42,12 +42,14 @@ public class TerceroEBean implements Serializable {
     private ICorreoServicio correoServicio;
     private List<Correo> listaCorreos;
     private List<TipoTercero> listaTipoTerceros;
+    private TipoTercero tipo = TipoTercero.CLIENTE;
 
     public TerceroEBean() {
         LOGGER.log(Level.INFO, "Ejecutando constructor ({0})", this.getClass().getSimpleName());
         listaTipoTerceros = listarTipoTercero();
         listaTelefonos = listarTelefono();
         listaCorreos = listarCorreo();
+        //listar();
     }
 
     @PostConstruct
@@ -61,48 +63,59 @@ public class TerceroEBean implements Serializable {
         LOGGER.log(Level.INFO, "Registrando tercero ({0})", this.getClass().getSimpleName());
 
         try {
-            if (tercero.getId() == null || tercero.getId() == 0) {
-                LOGGER.log(Level.INFO, "Guardando tercero ({0})", this.getClass().getSimpleName());
-                tercero.setEstado(1);
-                terceroServicio.insertar(tercero);
+            Tercero ttmp = terceroServicio.consultarPorNumeroId(tercero.getNumeroId());
+            if (tercero.getId() == null) {
+                if (ttmp != null) {
+                    throw new Exception("Ya existe un tercero con el id: " + tercero.getNumeroId());
+                } else {
+                    LOGGER.log(Level.INFO, "Guardando tercero ({0})", tercero.getNumeroId());
+                    tercero.setEstado(1);
+                    tercero.setTipo(tipo);
+                    tercero.setTelefonos(prepararTelefonos(listaTelefonos));
+                    tercero.setCorreos(prepararCorreos(listaCorreos));
+                    terceroServicio.insertar(tercero);
+                    Mensajes.agregarInfoMensaje("¡Tercero " + tercero.getNumeroId() + " guardado exitosamente!", null);
+                }
             } else {
-                LOGGER.log(Level.INFO, "Modificando datos del tercero ({0})", this.getClass().getSimpleName());
-                terceroServicio.modificar(tercero);
+                if (ttmp != null && (!tercero.getId().equals(ttmp.getId()) && ttmp.getEstado() != 0)) {
+                    throw new Exception("Ya existe un tercero con el numero: " + tercero.getNumeroId());
+                } else {
+                    LOGGER.log(Level.INFO, "Modificando datos del tercero ({0})", tercero.getNumeroId());
+                    tercero.setTelefonos(prepararTelefonos(listaTelefonos));
+                    tercero.setCorreos(prepararCorreos(listaCorreos));
+                    terceroServicio.modificar(tercero);
+                    Mensajes.agregarInfoMensaje("¡Tercero " + tercero.getNumeroId() + " modificada!", null);
+                }
             }
             listar();
             tercero = new Tercero();
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al registrar tercero ({0})", this.getClass().getSimpleName());
+            LOGGER.log(Level.SEVERE, "¡Error al guardar/modificar: ({0})!", e.getMessage());
+            Mensajes.agregarErrorMensaje("¡Error: " + e.getMessage() + "!", null);
         }
     }
 
     private void listar() {
         LOGGER.log(Level.INFO, "Actualizando...");
-        listaTerceros = terceroServicio.listarTodo(Tercero.class);
+        listaTerceros = terceroServicio.listarHabilitados();
     }
 
     private ArrayList<TipoTercero> listarTipoTercero() {
         ArrayList<TipoTercero> l = new ArrayList<TipoTercero>();
-        l.addAll(Arrays.asList(TipoTercero.values()));
-        //Excluye al dueño de la seleccion
-        l.remove(TipoTercero.DUEÑO);
-        l.remove(TipoTercero.USUARIO);
+        for (TipoTercero tt : TipoTercero.values()) {
+            if (tt.getEscogible()) {
+                l.add(tt);
+            }
+        }
         return l;
     }
 
     public void seleccionar(Tercero tercero) {
         LOGGER.log(Level.INFO, "Seleccionando tercero ({0})", this.getClass().getSimpleName());
         this.tercero = tercero;
-    }
-
-    public void eliminar(Tercero tercero) {
-        LOGGER.log(Level.INFO, "Eliminando tercero ({0})", this.getClass().getSimpleName());
-        try {
-            terceroServicio.eliminar(tercero.getId(), Tercero.class);
-            listar();
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al eliminar tercero ({0})", this.getClass().getSimpleName());
-        }
+        this.tipo = tercero.getTipo();
+        this.listaCorreos = tercero.getCorreos();
+        this.listaTelefonos = tercero.getTelefonos();
     }
 
     private Telefono prepararTelefono(Telefono t) {
@@ -111,9 +124,19 @@ public class TerceroEBean implements Serializable {
         return t;
     }
 
+    private List<Telefono> prepararTelefonos(List<Telefono> lts) {
+        List<Telefono> l = new ArrayList<Telefono>();
+        for (Telefono t : lts) {
+            l.add(prepararTelefono(t));
+        }
+        return l;
+    }
+
     public void addTelefono(Telefono telefono) {
-        LOGGER.log(Level.INFO, "Agregando Telefono {0}", telefono);
-        listaTelefonos.add(telefono);
+        if (!listaTelefonos.contains(telefono) && !telefono.getNumero().isEmpty()) {
+            LOGGER.log(Level.INFO, "Agregando Telefono {0}", telefono);
+            listaTelefonos.add(telefono);
+        }
     }
 
     public void imprimir(Telefono t) {
@@ -147,9 +170,19 @@ public class TerceroEBean implements Serializable {
         return c;
     }
 
+    private List<Correo> prepararCorreos(List<Correo> lcs) {
+        List<Correo> l = new ArrayList<Correo>();
+        for (Correo c : lcs) {
+            l.add(prepararCorreo(c));
+        }
+        return l;
+    }
+
     public void addCorreo(Correo correo) {
-        LOGGER.log(Level.INFO, "Agregando Correo {0}", correo);
-        listaCorreos.add(correo);
+        if (!listaCorreos.contains(correo) && !correo.getEmail().isEmpty()) {
+            LOGGER.log(Level.INFO, "Agregando Correo {0}", correo);
+            listaCorreos.add(correo);
+        }
     }
 
     public void editarCorreo(Correo correo) {
@@ -170,6 +203,34 @@ public class TerceroEBean implements Serializable {
             c = correoServicio.consultarPorTercero(tercero);
         }
         return c;
+    }
+
+    public void eliminar() {
+        eliminar(tercero);
+    }
+
+    public void eliminar(Tercero tercero) {
+        LOGGER.log(Level.INFO, "Eliminando bodega ({0})", tercero.getNombres());
+        try {
+            //terceroServicio.eliminar(bodega.getId(), Bodega.class);
+            tercero.setEstado(0);
+            terceroServicio.modificar(tercero);
+            Mensajes.agregarInfoMensaje("Tercero " + tercero.getNombres() + " eliminado exitosamente!", null);
+            listar();
+            nuevo();
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "¡Error al eliminar tercero: ({0})!", e.getMessage());
+            Mensajes.agregarErrorMensaje("¡Error: " + e.getMessage() + "!", null);
+        }
+    }
+
+    public void nuevo() {
+        LOGGER.log(Level.INFO, "Creando nuevo tercero");
+        listaTipoTerceros = listarTipoTercero();
+        listaTelefonos = new ArrayList<Telefono>();
+        listaCorreos = new ArrayList<Correo>();
+        tercero = new Tercero();
+        Mensajes.agregarInfoMensaje("¡Nuevo tercero!", null);
     }
 
     public List<Correo> getListaCorreos() {
@@ -210,5 +271,13 @@ public class TerceroEBean implements Serializable {
 
     public void setListaTipoTerceros(List<TipoTercero> listaTipoTerceros) {
         this.listaTipoTerceros = listaTipoTerceros;
+    }
+
+    public TipoTercero getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoTercero tipo) {
+        this.tipo = tipo;
     }
 }

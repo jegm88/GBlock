@@ -168,7 +168,7 @@ public class RegistroInicial {
 
         FormaPago formaPago = new FormaPago("Efectivo", "Dinero en efectivo", 1);
 
-        Tercero dueno = new Tercero("0001", "nit", 1, "gblock inc.", "", "", TipoTercero.DUEÑO, 1);
+        Tercero dueno = new Tercero("0001", "nit", 1, "GBlock", "Inc", "Cartagena", TipoTercero.DUEÑO, 1);
 
         CategoriaArticulo categoriaArticulo = new CategoriaArticulo("Amortiguador", "", 1);
         Articulo art = new Articulo("Amortiguador01", "Amortiguador para vehiculos carga", "suzuki", "rtp102", 120000.0, 16.0F, 19200.0, categoriaArticulo, null, 1);

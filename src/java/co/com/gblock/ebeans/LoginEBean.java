@@ -7,6 +7,7 @@ package co.com.gblock.ebeans;
 import co.com.gblock.entity.Permiso;
 import co.com.gblock.services.interfaceServicios.IUsuarioServicio;
 import co.com.gblock.entity.Usuario;
+import co.com.gblock.services.utilidad.Mensajes;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -42,15 +43,16 @@ public class LoginEBean implements Serializable {
         Usuario usuarioLogin = usuarioServicio.login(usuario);
 
         if (usuarioLogin != null) {
-            String[] a = {usuarioLogin.getNick(),usuarioLogin.getPerfil().getNombre()};
+            String[] a = {usuarioLogin.getNick(), usuarioLogin.getPerfil().getNombre()};
             LOGGER.log(Level.INFO, "Usuario {0} logeado exitosamente como {1}!", a);
-            for(Permiso p :usuarioLogin.getPerfil().getPermisos()){
-                LOGGER.log(Level.INFO, a[1]+" puede "+ p.getNombre());
+            for (Permiso p : usuarioLogin.getPerfil().getPermisos()) {
+                LOGGER.log(Level.INFO, a[1] + " puede " + p.getNombre());
             }
             usuario = usuarioLogin;
             return ppal;
         } else {
             LOGGER.log(Level.WARNING, "Login incorrecto, usuario o contraseña inválido!");
+            Mensajes.agregarErrorMensaje("¡Error: Usuario inválido!", null);
             return regresar();
         }
     }
@@ -67,18 +69,23 @@ public class LoginEBean implements Serializable {
         return login;
     }
 
-    public Boolean puede(String permiso){
+    public Boolean puede(String permiso) throws Exception {
+        if (usuario == null || usuario.getPerfil() == null || usuario.getPerfil().getPermisos() == null || usuario.getPerfil().getPermisos().isEmpty()) {
+            Mensajes.agregarErrorMensaje("¡Error: Usuario inválido!", null);
+            throw new Exception("Usuario inválido");
+        }
+
         List<Permiso> permisos = usuario.getPerfil().getPermisos();
         Boolean r = false;
         for (Permiso p : permisos) {
-            if(p.getNombre().toUpperCase().equals(permiso.toUpperCase())){
-                r=true;
+            if (p.getNombre().toUpperCase().equals(permiso.toUpperCase())) {
+                r = true;
                 break;
             }
         }
         return r;
     }
-    
+
     public Usuario getUsuario() {
         return usuario;
     }

@@ -10,19 +10,21 @@ package co.com.gblock.services.utilidad;
  */
 public enum TipoTercero {
 
-    DUEÑO(0,"Dueño","Dueño de la licencia"),
-    CLIENTE(1, "Cliente", "A quien se le venden los productos"),
-    PROVEEDOR(2, "Proveedor", "Quien vende los productos"),
-    USUARIO(3, "Usuario", "Usuario del sistema");
+    DUEÑO(0,"Dueño","Dueño de la licencia",false),
+    CLIENTE(1, "Cliente", "A quien se le venden los productos",true),
+    PROVEEDOR(2, "Proveedor", "Quien vende los productos",true),
+    USUARIO(3, "Usuario", "Usuario del sistema",false);
 
     Integer id;
     String nombre;
     String descripcion;
+    Boolean escogible;
 
-    private TipoTercero(Integer id, String nombre, String descripcion) {
+    private TipoTercero(Integer id, String nombre, String descripcion, Boolean escogible) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.escogible = escogible;
     }
 
     public Integer getId() {
@@ -49,6 +51,14 @@ public enum TipoTercero {
         this.descripcion = descripcion;
     }
 
+    public Boolean getEscogible() {
+        return escogible;
+    }
+
+    public void setEscogible(Boolean escogible) {
+        this.escogible = escogible;
+    }
+   
     @Override
     public String toString() {
         return nombre;
