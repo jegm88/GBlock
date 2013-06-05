@@ -62,8 +62,8 @@
 
             <p:dataTable id="tabtel" value="#{terceroEBean.listaTelefonos}" var="tel" editable="true">
                 <f:facet name="header">
-                    <p:inputText value="#{telefono.numero}" immediate="true" valueChangeListener="#{telefono.setNumero}" />
-                    <p:commandButton value="+" actionListener="#{terceroEBean.addTelefono(telefono)}" update="tabtel" title="Agregar" immediate="true" style="font-size: 0.8em;" />
+                    <p:inputText value="#{terceroEBean.telefono}" immediate="true" valueChangeListener="#{terceroEBean.setTelefono}" />
+                    <p:commandButton value="+" actionListener="#{terceroEBean.addTelefono()}" update="tabtel" title="Agregar" immediate="true" style="font-size: 0.8em;" />
                 </f:facet>
                 <p:column headerText="Teléfonos">
                     <p:inputText value="#{tel.numero}" disabled="true"/>
@@ -73,8 +73,8 @@
 
             <p:dataTable id="tabcorr" value="#{terceroEBean.listaCorreos}" var="cor" editable="true" rows="5">
                 <f:facet name="header">
-                    <p:inputText value="#{correo.email}" immediate="true" valueChangeListener="#{correo.setEmail}" />
-                    <p:commandButton value="+" actionListener="#{terceroEBean.addCorreo(correo)}" update="tabcorr" title="Agregar" immediate="true" style="font-size: 0.8em;"/>
+                    <p:inputText value="#{terceroEBean.correo}" immediate="true" valueChangeListener="#{terceroEBean.setCorreo}" />
+                    <p:commandButton value="+" actionListener="#{terceroEBean.addCorreo()}" update="tabcorr" title="Agregar" immediate="true" style="font-size: 0.8em;"/>
                 </f:facet>
                 <p:column headerText="Correos">
                     <p:inputText id="t" value="#{cor.email}" disabled="true"/>

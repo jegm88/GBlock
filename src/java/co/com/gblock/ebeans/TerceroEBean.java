@@ -21,6 +21,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIInput;
+import javax.faces.event.ValueChangeEvent;
 
 /**
  *
@@ -43,6 +45,8 @@ public class TerceroEBean implements Serializable {
     private List<Correo> listaCorreos;
     private List<TipoTercero> listaTipoTerceros;
     private TipoTercero tipo = TipoTercero.CLIENTE;
+    private String telefono;
+    private String correo;
 
     public TerceroEBean() {
         LOGGER.log(Level.INFO, "Ejecutando constructor ({0})", this.getClass().getSimpleName());
@@ -88,7 +92,7 @@ public class TerceroEBean implements Serializable {
                 }
             }
             listar();
-            tercero = new Tercero();
+            nuevo();
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "¡Error al guardar/modificar: ({0})!", e.getMessage());
             Mensajes.agregarErrorMensaje("¡Error: " + e.getMessage() + "!", null);
@@ -132,21 +136,23 @@ public class TerceroEBean implements Serializable {
         return l;
     }
 
-    public void addTelefono(Telefono telefono) {
-        if (!listaTelefonos.contains(telefono) && !telefono.getNumero().isEmpty()) {
+    public void addTelefono() {
+        Telefono tel = new Telefono();
+        tel.setNumero(telefono);
+        
+        if(listaCorreos==null){
+            listaCorreos= new ArrayList<Correo>();
+        }
+        
+        if (!listaTelefonos.contains(tel) && !telefono.isEmpty()) {
             LOGGER.log(Level.INFO, "Agregando Telefono {0}", telefono);
-            listaTelefonos.add(telefono);
+            tel = prepararTelefono(tel);
+            listaTelefonos.add(tel);
         }
     }
 
     public void imprimir(Telefono t) {
         LOGGER.log(Level.INFO, "Imprimir: {0}", t);
-    }
-
-    public void editarTelefono(Telefono telefono) {
-        LOGGER.log(Level.INFO, "Editando telefono");
-        listaTelefonos.remove(telefono);
-        listaTelefonos.add(telefono);
     }
 
     public void eliminarTelefono(Telefono telefono) {
@@ -155,7 +161,7 @@ public class TerceroEBean implements Serializable {
     }
 
     private List<Telefono> listarTelefono() {
-        List<Telefono> l = new ArrayList<Telefono>();
+        List<Telefono> l = null;
 
         if (tercero != null && tercero.getId() != null) {
             LOGGER.log(Level.INFO, "Listando telefonos");
@@ -178,17 +184,17 @@ public class TerceroEBean implements Serializable {
         return l;
     }
 
-    public void addCorreo(Correo correo) {
-        if (!listaCorreos.contains(correo) && !correo.getEmail().isEmpty()) {
-            LOGGER.log(Level.INFO, "Agregando Correo {0}", correo);
-            listaCorreos.add(correo);
+    public void addCorreo() {
+        Correo cor = new Correo();
+        cor.setEmail(correo);
+        if(listaCorreos==null){
+            listaCorreos= new ArrayList<Correo>();
         }
-    }
-
-    public void editarCorreo(Correo correo) {
-        LOGGER.log(Level.INFO, "Editando correo");
-        listaCorreos.remove(correo);
-        listaCorreos.add(correo);
+        if (!listaCorreos.contains(cor) && !correo.isEmpty()) {
+            LOGGER.log(Level.INFO, "Agregando Correo {0}", correo);
+            cor = prepararCorreo(cor);
+            listaCorreos.add(cor);
+        }
     }
 
     public void eliminarCorreo(Correo correo) {
@@ -279,5 +285,33 @@ public class TerceroEBean implements Serializable {
 
     public void setTipo(TipoTercero tipo) {
         this.tipo = tipo;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    //Metodo seteo managedbean (al utilizar el immediate="true")
+    public void setCorreo(ValueChangeEvent ev) {
+        setCorreo((String) ev.getNewValue());
+        ((UIInput) ev.getComponent()).setLocalValueSet(true);
+    }
+
+    //Metodo seteo managedbean (al utilizar el immediate="true")
+    public void setTelefono(ValueChangeEvent ev) {
+        setTelefono((String) ev.getNewValue());
+        ((UIInput) ev.getComponent()).setLocalValueSet(true);
     }
 }

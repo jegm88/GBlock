@@ -24,7 +24,6 @@ import javax.validation.constraints.Size;
  *
  * @author jhonny
  */
-@ManagedBean
 @Entity
 @Table(name = "telefonos")
 @NamedQuery(name = "Telefono.consultarPorTercero", query = "SELECT o FROM Telefono o WHERE o.tercero = :tercero")
@@ -139,10 +138,4 @@ public class Telefono implements Serializable {
         return numero;
     }
     //</editor-fold>
-
-    //Metodo seteo managedbean (al utilizar el immediate="true")
-    public void setNumero(ValueChangeEvent ev) {
-        setNumero((String) ev.getNewValue());
-        ((UIInput) ev.getComponent()).setLocalValueSet(false);
-    }
 }

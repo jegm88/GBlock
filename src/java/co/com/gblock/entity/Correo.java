@@ -24,7 +24,6 @@ import javax.validation.constraints.Size;
  *
  * @author jhonny
  */
-@ManagedBean
 @Entity
 @Table(name = "correos")
 @NamedQuery(name = "Correo.consultarPorTercero", query = "SELECT o FROM Correo o WHERE o.tercero = :tercero")
@@ -140,9 +139,4 @@ public class Correo implements Serializable {
     }
     //</editor-fold>
 
-    //Metodo seteo managedbean (al utilizar el immediate="true")
-    public void setEmail(ValueChangeEvent ev) {
-        setEmail((String) ev.getNewValue());
-        ((UIInput) ev.getComponent()).setLocalValueSet(false);
-    }
 }
