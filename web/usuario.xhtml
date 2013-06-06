@@ -1,44 +1,57 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Usuario</title>
-        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
-    </h:head>
-    <h:body>
-        
-        <h:form>
-            <header class="buAction">
-                <p:menuButton styleClass="buAction" value="Usuario: #{loginEBean.usuario.nick}">
-                    <p:menuitem value="Configurar Cuenta" title="configurar cuenta"/>
-                    <p:menuitem value="LogOut" action="#{loginEBean.regresar()}" title="cerrar sesion" ajax="false"/>
-                </p:menuButton>
-            </header>
-        </h:form>
-        
-        <h:form id="fusuario">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./WEB-INF/plantilla.xhtml">
+    <ui:define name="tituloContent">Usuario</ui:define>
+
+    <ui:define name="dialogos">
+        <p:dialog widgetVar="usuarioConsultar" modal="true" position="center" header="Lista de Usuarios" dynamic="true">
+            <p:dataTable value="#{usuarioEBean.listaUsuarios}" var="usr" rows="5">
+                <p:column headerText="Nick">
+                    #{usr.nick}
+                </p:column>
+                <p:column headerText="Perfil">
+                    #{usr.perfil.descripcion}
+                </p:column>
+                <p:column headerText="Accion" style="text-align: center;">
+                    <p:commandButton value="Ver" immediate="true" action="usr"
+                                     actionListener="#{usuarioEBean.seleccionar(usr)}" update=":frmtodo"
+                                     oncomplete="usuarioConsultar.hide()"
+                                     />
+                </p:column>
+            </p:dataTable>
+        </p:dialog>
+    </ui:define>
+    <ui:define name="content">
+        <h:panelGrid columns="3" >
+            <h:outputText value="Usuario (Nick)"/>
+            <p:inputText value="#{usuarioEBean.usuario.nick}" required="true"/>
+            <br/>
             
-            <div id="regusu" class="registros">
-                
-                <p:panelGrid columns="2">
-                    <f:facet name="header">
-                        Usuario
-                    </f:facet>
-                    <p:outputLabel value="Nick"/>
-                    <p:inputText value="#{usuarioEBean.usuario.nick}"/>
-                    
-                    <p:outputLabel value="Password"/>
-                    <p:password value="#{usuarioEBean.usuario.password}"/>
-                    
-                    
-                    
-                </p:panelGrid>
-                
-            </div>
-        </h:form>
-    </h:body>
-</html>
+            <h:outputText value="Password"/>
+            <p:inputText value="#{usuarioEBean.usuario.password}" required="true"/>
+            <br/>
+            
+            <h:outputText value="Perfil"/>
+            <p:selectOneMenu value="#{usuarioEBean.perfil}" required="true" rendered="#{loginEBean.puede('MU')}">
+                <f:selectItems value="#{usuarioEBean.listaPerfiles}" />
+            </p:selectOneMenu>
+        </h:panelGrid>
+    </ui:define>
+
+    <ui:define name="accItem2">
+        <li id="two" class="opciones"><a href="#two">Opciones</a>
+            <ul class="sub-menu">
+                <li class="nuevo"><p:commandLink action="#{usuarioEBean.nuevo()}"  update=":frmtodo" rendered="#{loginEBean.puede('CU')}">Nuevo</p:commandLink></li>
+                <li class="guardar"><p:commandLink action="#{usuarioEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('CU') and usuarioEBean.usuario.id == null}">Guardar</p:commandLink></li>
+                <li class="modificar"><p:commandLink action="#{usuarioEBean.guardar()}" update=":frmtodo" rendered="#{loginEBean.puede('MU') and usuarioEBean.usuario.id !=null}">Modificar</p:commandLink></li>
+                <li class="eliminar"><p:commandLink action="#{usuarioEBean.eliminar()}" update=":frmtodo" rendered="#{loginEBean.puede('EU') and usuarioEBean.usuario.id !=null}">Eliminar</p:commandLink></li>
+                <li class="consultar"><p:commandLink onclick="usuarioConsultar.show();" immediate="true" type="button">Consultar</p:commandLink></li>
+                <li class="imprimir"><p:commandLink update=":frmtodo" rendered="#{false}">Imprimir</p:commandLink></li>
+            </ul>
+        </li>
+    </ui:define>
+</ui:composition>
 

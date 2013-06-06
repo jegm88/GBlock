@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,6 +25,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "perfiles")
+@NamedQuery(name = "Perfil.listarHabilitados", query = "SELECT p FROM Perfil p WHERE p.estado <> 0")
 public class Perfil implements Serializable {
 
     @Id
@@ -131,7 +133,7 @@ public class Perfil implements Serializable {
 
     @Override
     public String toString() {
-        return "Perfil{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", estado=" + estado + '}';
+        return nombre;
     }
     //</editor-fold>
 }

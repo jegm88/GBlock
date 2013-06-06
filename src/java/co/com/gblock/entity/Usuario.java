@@ -5,6 +5,7 @@
 package co.com.gblock.entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,7 +25,11 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "usuarios")
-@NamedQuery(name="Usuario.login", query="SELECT u FROM Usuario u WHERE u.nick = :nick AND u.password = :password")
+@NamedQueries({
+    @NamedQuery(name = "Usuario.login", query = "SELECT u FROM Usuario u WHERE u.nick = :nick AND u.password = :password AND u.estado <> 0"),
+    @NamedQuery(name = "Usuario.consultarPorNick", query = "SELECT u FROM Usuario u WHERE u.nick = :nick AND u.estado <> 0"),
+    @NamedQuery(name = "Usuario.listarHabilitados", query = "SELECT u FROM Usuario u WHERE u.estado <> 0")
+})
 public class Usuario implements Serializable {
 
     @Id
@@ -33,23 +39,22 @@ public class Usuario implements Serializable {
     private String nick;
     @Size(min = 1, max = 50)
     private String password;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tercero", referencedColumnName = "id")
-    @OneToOne
     private Tercero tercero;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "perfil", referencedColumnName = "id")
     private Perfil perfil;
-    
     private Integer estado;
-    
+
     public Usuario() {
     }
 
-    public Usuario(String nick, String password){
+    public Usuario(String nick, String password) {
         this.nick = nick;
         this.password = password;
     }
-    
+
     public Usuario(String nick, String password, Tercero tercero, Perfil perfil, Integer estado) {
         this.nick = nick;
         this.password = password;
@@ -108,7 +113,6 @@ public class Usuario implements Serializable {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Metodos sobreescritos">
     @Override
     public int hashCode() {
@@ -157,5 +161,4 @@ public class Usuario implements Serializable {
         return "Usuario{" + "id=" + id + ", nick=" + nick + ", password=" + password + ", estado=" + estado + ", tercero=" + tercero + ", perfil=" + perfil + '}';
     }
     //</editor-fold>    
-
 }

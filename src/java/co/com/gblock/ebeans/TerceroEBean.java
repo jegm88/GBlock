@@ -216,9 +216,9 @@ public class TerceroEBean implements Serializable {
     }
 
     public void eliminar(Tercero tercero) {
-        LOGGER.log(Level.INFO, "Eliminando bodega ({0})", tercero.getNombres());
+        LOGGER.log(Level.INFO, "Eliminando tercero ({0})", tercero.getNombres());
         try {
-            //terceroServicio.eliminar(bodega.getId(), Bodega.class);
+            //terceroServicio.eliminar(tercero.getId(), Tercero.class);
             tercero.setEstado(0);
             terceroServicio.modificar(tercero);
             Mensajes.agregarInfoMensaje("Tercero " + tercero.getNombres() + " eliminado exitosamente!", null);

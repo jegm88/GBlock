@@ -5,6 +5,7 @@
 package co.com.gblock.services.interfaceServicios;
 
 import co.com.gblock.entity.Usuario;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,6 +14,10 @@ import javax.ejb.Local;
  */
 @Local
 public interface IUsuarioServicio extends IGenericaServicio<Usuario, Integer> {
-    
+
     Usuario login(Usuario usuario);
+
+    Usuario consultarPorNick(String nick);
+
+    List<Usuario> listarHabilitados();
 }

@@ -5,6 +5,7 @@
 package co.com.gblock.services.interfaceServicios;
 
 import co.com.gblock.entity.Perfil;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +14,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface IPerfilServicio extends IGenericaServicio<Perfil, Integer> {
-    
+    public List<Perfil> listarHabilitados();
 }
