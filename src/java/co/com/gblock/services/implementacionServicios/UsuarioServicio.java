@@ -18,16 +18,17 @@ import javax.persistence.TypedQuery;
  * @author FGulfo
  */
 @Stateless
-public class UsuarioServicio extends GenericaServicio<Usuario, Integer> implements IUsuarioServicio{
+public class UsuarioServicio extends GenericaServicio<Usuario, Integer> implements IUsuarioServicio {
+
     private static final Logger LOGGER = Logger.getLogger("UsuarioServicio");
 
     @Override
     public Usuario login(Usuario usuario) {
-        
+
         TypedQuery<Usuario> query = entityManager.createNamedQuery("Usuario.login", Usuario.class);
         query.setParameter("nick", usuario.getNick());
         query.setParameter("password", usuario.getPassword());
-        
+
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
@@ -38,10 +39,10 @@ public class UsuarioServicio extends GenericaServicio<Usuario, Integer> implemen
 
     @Override
     public Usuario consultarPorNick(String nick) {
-        
+
         TypedQuery<Usuario> query = entityManager.createNamedQuery("Usuario.consultarPorNick", Usuario.class);
         query.setParameter("nick", nick);
-       
+
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
@@ -49,8 +50,8 @@ public class UsuarioServicio extends GenericaServicio<Usuario, Integer> implemen
             return null;
         }
     }
-    
-        @Override
+
+    @Override
     public List<Usuario> listarHabilitados() {
         LOGGER.log(Level.INFO, "Ejecutando metodo listar habilitados ({0})", this.getClass().getSimpleName());
         TypedQuery<Usuario> query = entityManager.createNamedQuery("Usuario.listarHabilitados", Usuario.class);

@@ -35,10 +35,11 @@ public class UsuarioEBean implements Serializable {
     private IPerfilServicio perfilServicio;
     private Perfil perfil;
     private List<Perfil> listaPerfiles;
-    
+
     public UsuarioEBean() {
         LOGGER.log(Level.INFO, "Ejecutando constructor ({0})", this.getClass().getSimpleName());
-        //listar();
+        listaPerfiles = perfilServicio.listarHabilitados();
+        usuario = new Usuario();
     }
 
     @PostConstruct
@@ -115,6 +116,12 @@ public class UsuarioEBean implements Serializable {
         }
     }
 
+    public String mostrarUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        return "usuario?faces-redirect=true";
+    }
+
+    
     public void nuevo() {
         LOGGER.log(Level.INFO, "Creando nuevo usuario");
         usuario = new Usuario();
@@ -137,6 +144,14 @@ public class UsuarioEBean implements Serializable {
         this.usuario = usuario;
     }
 
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+
     public List<Perfil> getListaPerfiles() {
         return listaPerfiles;
     }
@@ -144,12 +159,4 @@ public class UsuarioEBean implements Serializable {
     public void setListaPerfiles(List<Perfil> listaPerfiles) {
         this.listaPerfiles = listaPerfiles;
     }
-
-    public Perfil getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
-    }   
 }

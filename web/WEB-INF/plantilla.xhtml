@@ -56,7 +56,7 @@
                         <ui:insert name="accItem3">
                             <li id="three" class="usuarios"><a href="#three">Usuario: #{loginEBean.usuario.nick}</a>
                                 <ul class="sub-menu">
-                                    <li class="configuracion"><h:commandLink immediate="true">Configurar Cuenta</h:commandLink></li>
+                                    <li class="configuracion"><h:commandLink action="#{usuarioEBean.mostrarUsuario(loginEBean.usuario)}" immediate="true">Configurar Cuenta</h:commandLink></li>
                                     <li class="logout"><h:commandLink action="#{loginEBean.logout()}" immediate="true">Cerrar Sesion</h:commandLink></li>
                                 </ul>
                             </li>

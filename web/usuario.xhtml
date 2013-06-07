@@ -8,16 +8,16 @@
 
     <ui:define name="dialogos">
         <p:dialog widgetVar="usuarioConsultar" modal="true" position="center" header="Lista de Usuarios" dynamic="true">
-            <p:dataTable value="#{usuarioEBean.listaUsuarios}" var="usr" rows="5">
+            <p:dataTable value="#{usuarioEBean.listaUsuarios}" var="usuario" rows="5">
                 <p:column headerText="Nick">
-                    #{usr.nick}
+                    #{usuario.nick}
                 </p:column>
                 <p:column headerText="Perfil">
-                    #{usr.perfil.descripcion}
+                    #{usuario.perfil.descripcion}
                 </p:column>
                 <p:column headerText="Accion" style="text-align: center;">
-                    <p:commandButton value="Ver" immediate="true" action="usr"
-                                     actionListener="#{usuarioEBean.seleccionar(usr)}" update=":frmtodo"
+                    <p:commandButton value="Ver" immediate="true" action="usuario"
+                                     actionListener="#{usuarioEBean.seleccionar(usuario)}" update=":frmtodo"
                                      oncomplete="usuarioConsultar.hide()"
                                      />
                 </p:column>
@@ -31,13 +31,13 @@
             <br/>
             
             <h:outputText value="Password"/>
-            <p:inputText value="#{usuarioEBean.usuario.password}" required="true"/>
+            <p:password value="#{usuarioEBean.usuario.password}" required="true"/>
             <br/>
             
-            <h:outputText value="Perfil"/>
-            <p:selectOneMenu value="#{usuarioEBean.perfil}" required="true" rendered="#{loginEBean.puede('MU')}">
+            <h:outputText value="Perfil" rendered="#{loginEBean.puede('MU')}"/>
+            <h:selectOneMenu value="#{usuarioEBean.perfil}" required="true" rendered="#{loginEBean.puede('MU')}">
                 <f:selectItems value="#{usuarioEBean.listaPerfiles}" />
-            </p:selectOneMenu>
+            </h:selectOneMenu>
         </h:panelGrid>
     </ui:define>
 
